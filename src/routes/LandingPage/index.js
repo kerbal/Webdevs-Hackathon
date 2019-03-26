@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import cx from 'classnames';
-import illu from './online-survey.png';
-import people from './people2.png';
-import survey from './survey2.png';
-import certification from './certification2.png';
+import people from '../../images/landing-page/people2.png';
+import survey from '../../images/landing-page/survey2.png';
+import certification from '../../images/landing-page/certification2.png';
 
 import './landing-page.css';
+import { AuthService } from '../../services/AuthService';
+import { AuthButton } from '../../components/Buttons';
 
-export function LandingPage() {
+export function LandingPage({ history }) {
   const [isLogin, setIsLogin] = useState(false);
   return (
     <div className="lp">
-      <nav className="navbar ">
+      <nav className="navbar">
         <div className="container">
           <a className="navbar-brand text-white" href="/">Thi Hương</a>
           <div className="form-inline my-2 my-lg-0">
@@ -20,13 +21,13 @@ export function LandingPage() {
           </div>
         </div>
       </nav>
-      <div className="container mt-5">
+      <div className="container my-5">
         <div className="row">
-          <div className="col-md-7 text-white mt-5 pt-5 pr-4 font-italic">
-            <h3>"Hiền tài là nguyên khí quốc gia, nguyên khí thịnh thì thế nước mạnh rồi lên cao, nguyên khí suy thì thế nước yếu rồi xuống thấp."</h3>
-            <h5 className="text-right mt-3 font-itatlic">- Thân Nhân Trung -</h5>
+          <div className="col-md-6 col-lg-7 text-white mt-md-5 pt-md-5 pr-md-4 font-italic">
+            <h3 class="text-center text-md-left">"Hiền tài là nguyên khí quốc gia, nguyên khí thịnh thì thế nước mạnh rồi lên cao, nguyên khí suy thì thế nước yếu rồi xuống thấp."</h3>
+            <h5 className="text-center text-md-right mb-4 mt-4 font-itatlic">- Thân Nhân Trung -</h5>
           </div>
-          <div className="col-md-5 pl-md-4">
+          <div className="col-md-6 col-lg-5 pt-5 pt-md-0 pl-md-4">
             <div className="card">
               <div className="card-body">
                 <ul className="nav nav-tabs mb-5">
@@ -51,14 +52,16 @@ export function LandingPage() {
                   <input className="form-control" type="text" placeholder="Nhập lại mật khẩu" />
                 </div>}
                 <div className="form-group">
-                  <button className="w-100 btn btn-primary">{isLogin ? "Đăng nhập" : "Ghi danh"}</button>
+                  <AuthButton className="w-100 btn btn-primary" onClick={_ => AuthService.login()}>
+                    {isLogin ? "Đăng nhập" : "Ghi danh"}
+                  </AuthButton>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-5 pr-md-4">
+        <div className="row pb-5 mb-5">
+          <div className="col-md-6 col-lg-5 pr-md-4 order-2 order-md-1">
             <div className="card w-100">
               <div className="card-body">
               <h3 className="text-center text-primary mt-4">Bảng vàng thành tích</h3>
@@ -66,40 +69,41 @@ export function LandingPage() {
                 <span className="smallline bg-primary"></span>
               </div>
               {Array.from(Array(10)).map((_, rank) => (
-                <h4 key={rank} className="my-3 form-control">{rank+1}. Super Hero {rank+1}</h4>
+                <h4 key={rank} className="my-3 form-control hover">{rank+1}. Super Hero {rank+1}</h4>
               ))}
-              <p className="text-center text-primary">Chi tiết</p>
+              <h4 className="text-center text-primary mt-4">Chi tiết</h4>
               </div>
             </div>
           </div>
-          <div className="col-md-7 d-flex align-items-center mt-5 pt-5 pl-4 font-italic">
-            <h3 className="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis sint, accusamus laboriosam porro beatae officiis repudiandae deserunt modi quibusdam consequuntur.</h3>
+          <div className="col-md-6 col-lg-7 d-flex align-items-center my-5 pt-5 pl-4 font-italic order-1 order-md-2">
+            <h3 className="text-center text-md-right">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis sint, accusamus laboriosam porro beatae officiis repudiandae deserunt modi quibusdam consequuntur.</h3>
           </div>
         </div>
-        <div className="row pt-5 mt-5">
-          <div className="col-md-4 d-flex align-items-center">
+        <div className="row py-md-5 my-5">
+          <div className="card-hover col-md-4 d-flex justify-content-center">
             <div className="text-center">
               <img width="100" src={people} alt="People"/>
               <h5 className="my-3 text-pink">10000+ sĩ tử đã ghi danh</h5>
             </div>
           </div>
-          <div className="col-md-4 d-flex align-items-center">
+          <div className="card-hover col-md-4 d-flex justify-content-center">
             <div className="text-center">
               <img width="100" src={survey} alt="Submition" />
               <h5 className="my-3 text-pink">5000+ bài thi đã được hoàn thành</h5>
             </div>
           </div>
-          <div className="col-md-4 d-flex align-items-center">
+          <div className="card-hover col-md-4 d-flex justify-content-center">
             <div className="text-center">
               <img width="100" src={certification} alt="Success" />
               <h5 className="my-3 text-pink">100+ hiền tài đã được vinh danh</h5>
             </div>
           </div>
         </div>
-        <div class="mt-5 pt-5 row">
-
-        </div>
       </div>
+      <footer className="mt-5 bg-light py-5 text-center">
+        <h5>Webdevs Hackathon 2019</h5>
+        <h5 class="mb-0"><small>&copy; Javascript team</small></h5>
+      </footer>
     </div>
   )
 }

@@ -1,3 +1,13 @@
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  transition: all 0.2s ease-out 0s;
+}
+.header.sticky {
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.13) 0px 0px 24px 0px;
+}
 .nav-tabs .nav-link, .nav-tabs {
   border: 0;
   color: #333;
@@ -11,16 +21,6 @@
 }
 .form-group .form-control::placeholder {
   color: #ddd;
-}
-.sdimg {
-  background: rgba(0,0,0,.8);
-}
-.sdimg__img {
-  position: absolute;
-  z-index: -1;
-}
-.bg-pink {
-  background: #677AE8;
 }
 .smallline {
   width: 100px;
@@ -46,17 +46,28 @@
   background: url(../../images/landing-page/buble-bg.svg);
   background-repeat: no-repeat;
   background-size: cover;
+  background-position-x: -10px;
   width: 100%;
   min-height: 100vh;
 }
+.btn-menu {
+  font-size: 24px;
+  cursor: pointer;
+}
+
 @media (max-width: 767px) {
   .lp {
-    background-position-y: -2250px;
+    background-position-y: -2200px;
+  }
+  .mobile-menu {
+    background: #fff;
+    left: 0;
+    right: 0;
   }
 }
 @media (min-width: 450px) {
   .lp {
-    background-position-y: -2200px;
+    background-position-y: -2100px;
   }
 }
 /* md */

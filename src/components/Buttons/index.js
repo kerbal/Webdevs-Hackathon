@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 function build(path) {
-  return withRouter(({ history, onClick, children, ...rest }) => (
+  return withRouter(({ history, onClick, children, staticContext, ...rest }) => (
     <button {...rest} onClick={_ => {
       if (onClick()) {
         history.push(path);

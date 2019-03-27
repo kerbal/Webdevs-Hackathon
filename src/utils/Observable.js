@@ -3,6 +3,10 @@ export class Subject {
   
   subscribe(observe) {
     this.__observes.push(observe);
+    // Unsubscribe func
+    return () => {
+      this.__observes = this.__observes.filter(o => o !== observe);
+    }
   }
 
   broadcast() {

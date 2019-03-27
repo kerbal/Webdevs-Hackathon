@@ -2,7 +2,7 @@ import React from 'react';
 import { AuthService } from '../services/AuthService';
 import { Route, Redirect } from 'react-router-dom';
 
-function CustomRouteBuilder(getState, redirectPath) {
+function buildCustomRoute(getState, redirectPath) {
   return function ({ component: Component, ...rest }) {
     return (
       <Route
@@ -24,5 +24,5 @@ function CustomRouteBuilder(getState, redirectPath) {
   };
 }
 
-export const AuthRoute = CustomRouteBuilder(() => !AuthService.logged, '/home');
-export const PrivateRoute = CustomRouteBuilder(() => AuthService.logged, '/');
+export const AuthRoute = buildCustomRoute(() => !AuthService.logged, '/home');
+export const PrivateRoute = buildCustomRoute(() => AuthService.logged, '/');

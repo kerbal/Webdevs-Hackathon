@@ -1,11 +1,24 @@
 import React from 'react';
+import cx from 'classnames';
 
-export function Card({children}) {
+function Title({ children }) {
   return (
-    <div class="card bsd-3">
-      <div class="card-body">
-        {children}
-      </div>
-    </div>
+    <>
+      <h3 className="text-blue">{children}</h3>
+      <div className="smallline bg-blue"></div>
+    </>
   )
+}
+
+export class Card extends React.Component {
+  static Title = Title;
+  render() {
+    return (
+      <div className={cx("card", this.props.className)}>
+        <div className="card-body">
+          {this.props.children}
+        </div>
+      </div>
+    )
+  }
 }

@@ -24,5 +24,5 @@ function buildCustomRoute(getState, redirectPath) {
   };
 }
 
-export const AuthRoute = buildCustomRoute(() => !AuthService.logged, '/home');
+export const AuthRoute = buildCustomRoute(() => !AuthService.logged, '/app');
 export const PrivateRoute = buildCustomRoute(() => AuthService.logged, '/');

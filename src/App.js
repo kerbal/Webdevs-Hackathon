@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, withRouter } from "react-router-dom";
-
-import { LandingPage } from './routes/LandingPage';
+import { Switch } from "react-router-dom";
+import { Header } from './components/Header';
+import { PrivateRoute } from './containers/CustomRoute';
 import { Home } from './routes/Home';
-import { PrivateRoute, AuthRoute } from './containers/CustomRoute';
+import { LeaderBoard } from './routes/LeaderBoard';
 
 class App extends Component {
   render() {
     return (
       <>
-        <Router>
-          <AuthRoute path="/" exact component={LandingPage}></AuthRoute>
-          <PrivateRoute path="/home" component={Home}></PrivateRoute>
-        </Router> 
+        <Header></Header>
+        <Switch>
+          <PrivateRoute path="/app" exact component={Home}></PrivateRoute>
+          <PrivateRoute path="/app/leaderboard" component={LeaderBoard}></PrivateRoute>
+          <PrivateRoute path="/app/history" component={History}></PrivateRoute>
+        </Switch>
       </>
     );
   }

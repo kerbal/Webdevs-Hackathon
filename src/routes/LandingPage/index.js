@@ -11,7 +11,7 @@ import { AuthButton } from '../../components/Buttons';
 
 function scrollTo(query) {
   scrollToElement(query, {
-    offset: -80,
+    offset: -70,
     ease: 'out-quad',
     duration: 500
   })
@@ -26,7 +26,6 @@ export class LandingPage extends React.Component {
       navbarSticky: false,
     }
     this.setIsLogin = isLogin => this.setState({ isLogin });
-    this.setMobileMenu = mobileMenu => this.setState({ mobileMenu });
     this.navbarText = () => cx({"text-white": !this.state.navbarSticky}, {'text-blue': this.state.navbarSticky});
     this.navbar = createRef();
   }
@@ -37,6 +36,18 @@ export class LandingPage extends React.Component {
         navbarSticky: window.pageYOffset > sticky
       });
     }
+  }
+  setMobileMenu = (mobileMenu) => {
+    this.setState({ mobileMenu }, () => {
+      if (mobileMenu) {
+        window.onclick = (e) => {
+          if (!e.target.classList.toString().includes('btn-menu')) {
+            this.setState({ mobileMenu: false });
+            window.onclick = null;
+          }
+        }
+      }
+    });
   }
   render() {
     const { mobileMenu, isLogin, navbarSticky } = this.state;
@@ -49,19 +60,23 @@ export class LandingPage extends React.Component {
               <div className="form-inline my-2 my-lg-0">
                 <i className={cx("d-md-none fa fa-bars btn-menu", this.navbarText())} onClick={_ => this.setMobileMenu(!mobileMenu)}></i>
                 <div className="d-none d-md-flex">
+                  <a className={cx('nav-link', this.navbarText())} href="#" onClick={_ => scrollTo('#form-section')}>Ghi danh / Đăng nhập</a>
                   <a className={cx('nav-link', this.navbarText())} href="#" onClick={_ => scrollTo('#rank-section')}>Bảng xếp hạng</a>
                   <a className={cx('nav-link', this.navbarText())} href="#" onClick={_ => scrollTo('#stat-section')}>Về cuộc thi</a>
                 </div>
               </div>
             </div>
           </div>
-          <div className={cx("d-md-none navbar collapse navbar-collapse mobile-menu mt-2", {show: mobileMenu})}>
+          <div className={cx("d-md-none navbar collapse navbar-collapse mobile-menu mt-2", {'show': mobileMenu}, {'sticky': navbarSticky})}>
             <ul className="navbar-nav container">
               <li className="nav-item">
-                <a className="nav-link text-blue" href="#" onClick={_ => scrollTo('#rank-section')}>Bảng xếp hạng</a>
+                <a className={cx('nav-link', this.navbarText())} href="#" onClick={_ => scrollTo('#form-section')}>Ghi danh / Đăng nhập</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link text-blue" href="#" onClick={_ => scrollTo('#stat-section')}>Về cuộc thi</a>
+                <a className={cx('nav-link', this.navbarText())} href="#" onClick={_ => scrollTo('#rank-section')}>Bảng xếp hạng</a>
+              </li>
+              <li className="nav-item">
+                <a className={cx('nav-link', this.navbarText())} href="#" onClick={_ => scrollTo('#stat-section')}>Về cuộc thi</a>
               </li>
             </ul>
           </div>
@@ -72,7 +87,7 @@ export class LandingPage extends React.Component {
               <h3 className="text-center text-md-left">"Hiền tài là nguyên khí quốc gia, nguyên khí thịnh thì thế nước mạnh rồi lên cao, nguyên khí suy thì thế nước yếu rồi xuống thấp."</h3>
               <h5 className="text-center text-md-right mb-4 mt-4 font-itatlic">- Thân Nhân Trung -</h5>
             </div>
-            <div className="col-md-6 col-lg-5 pt-5 pt-md-0 pl-md-4">
+            <div id="form-section" className="col-md-6 col-lg-5 pt-5 pt-md-0 pl-md-4">
               <div className="card">
                 <div className="card-body">
                   <ul className="nav nav-tabs mb-5">
@@ -105,8 +120,8 @@ export class LandingPage extends React.Component {
               </div>
             </div>
           </div>
-          <div id="rank-section" className="row pb-5 mb-5">
-            <div className="col-md-6 col-lg-5 pr-md-4 order-2 order-md-1">
+          <div className="row pb-5 mb-5">
+            <div id="rank-section" className="col-md-6 col-lg-5 pr-md-4 order-2 order-md-1">
               <div className="card w-100">
                 <div className="card-body">
                 <h3 className="text-center text-blue mt-4">Bảng vàng thành tích</h3>
@@ -134,27 +149,27 @@ export class LandingPage extends React.Component {
             <div className="card-hover col-md-4 d-flex justify-content-center">
               <div className="text-center">
                 <img width="100" src={people} alt="People"/>
-                <h5><b className="text-success">10000+</b> </h5>
-                <h5 className="my-3 text-blue">Sĩ tử đã ghi danh</h5>
+                <h5 className="my-3"><b className="text-success">10000+</b> </h5>
+                <h5 className="my-3">Sĩ tử đã ghi danh</h5>
               </div>
             </div>
             <div className="card-hover col-md-4 d-flex justify-content-center">
               <div className="text-center">
                 <img width="100" src={survey} alt="Submition" />
-                <h5><b className="text-success">5000+</b></h5>
-                <h5 className="my-3 text-blue">Bài thi đã được hoàn thành</h5>
+                <h5 className="my-3"><b className="text-success">5000+</b></h5>
+                <h5 className="my-3">Bài thi đã được hoàn thành</h5>
               </div>
             </div>
             <div className="card-hover col-md-4 d-flex justify-content-center">
               <div className="text-center">
                 <img width="100" src={certification} alt="Success" />
-                <h5><b className="text-success">100+</b></h5>
-                <h5 className="my-3 text-blue">Hiền tài đã được vinh danh</h5>
+                <h5 className="my-3"><b className="text-success">100+</b></h5>
+                <h5 className="my-3">Hiền tài đã được vinh danh</h5>
               </div>
             </div>
           </div>
         </div>
-        <footer className="mt-5 bg-light py-5 text-center">
+        <footer className="mt-5 py-5 text-center text-white bg-light-blue">
           <h5>Webdevs Hackathon 2019</h5>
           <h5 className="mb-0"><small>&copy; Javascript team</small></h5>
         </footer>

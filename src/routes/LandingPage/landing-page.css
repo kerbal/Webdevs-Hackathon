@@ -57,12 +57,17 @@
 
 @media (max-width: 767px) {
   .lp {
-    background-position-y: -2200px;
+    background-position-y: -2300px;
   }
   .mobile-menu {
-    background: #fff;
     left: 0;
     right: 0;
+    background: #63b0e4;
+    border-bottom: 1px solid #fff;
+    border-top: 1px solid #fff;
+  }
+  .mobile-menu.sticky {
+    background: #fff;
   }
 }
 @media (min-width: 450px) {

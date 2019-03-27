@@ -11,5 +11,5 @@ function build(path) {
   ));
 }
 
-export const AuthButton = build('/home');
+export const AuthButton = build('/app');
 export const LogoutButton = build('/');

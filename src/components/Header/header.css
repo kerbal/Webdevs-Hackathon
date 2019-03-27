@@ -1,3 +1,10 @@
-.nav-link.active {
+.header>.container{
+  height: 70px;
+}
+.header .link {
+  text-decoration: none !important;
+  box-sizing: border-box;
+}
+.header .nav-link.active, .header .link:hover {
   border-bottom: 2px solid blue;
 }

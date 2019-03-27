@@ -8,8 +8,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import {BrowserRouter as Router} from 'react-router-dom';
+import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import { AuthRoute, PrivateRoute } from './containers/CustomRoute';
+import { LandingPage } from './routes/LandingPage';
 
 class Index extends React.Component {
   render() {

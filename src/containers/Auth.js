@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AuthService } from '../services/AuthService';
-import { withRouter } from 'react-router-dom';
 
 // export function Auth({ children }) {
 //   const [logged, setLogged] = useState(AuthService.logged);
@@ -18,7 +17,7 @@ export function withAuth(Component) {
   return class extends React.Component {
     constructor(props) {
       super(props);
-      state = { 
+      this.state = { 
         logged: AuthService.logged  
       }
       this.unsubscribe = AuthService.$auth.subscribe(logged => {
@@ -32,7 +31,7 @@ export function withAuth(Component) {
 
     render() {
       return (
-        <Component {...this.props, this.state.logged}></Component>
+        <Component {...this.props} logged={this.state.logged}></Component>
       )
     }
   }

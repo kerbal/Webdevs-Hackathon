@@ -7,16 +7,18 @@ import './header.css';
 
 function _Header({ logged }) {
   return (
-    <nav className="header bg-white bsd-1" ref={this.navbar}>
-      <div className="navbar">
-        <div className="container">
-          <Link className="nav-link" to="/">THI HƯƠNG</Link>
-          <NavLink className="nav-link" to="/history" activeClassName="active">LỊCH SỬ</NavLink>
-          <NavLink className="nav-link" to="/ranks" activeClassName="active">BẢNG VÀNG</NavLink>
-          <div className="form-inline my-2 my-lg-0">
-            <i className="d-md-none fa fa-bars btn-menu" onClick={}></i>
+    <nav className="header bg-white bsd-1">
+      <div class="navbar">
+        <div class="container">
+          <div className="d-flex align-items-center">
+            <Link className="nav-link px-0" to="/">Thi Hương</Link>
+            <NavLink className="nav-link ml-5 link" to="/app/history" activeClassName="active">Lịch sử</NavLink>
+            <NavLink className="nav-link ml-5 link" to="/app/leaderboard" activeClassName="active">Bảng vàng</NavLink>
+          </div>
+          <div className="form-inline">
+            <i className="d-md-none fa fa-bars btn-menu"></i>
             <div className="d-none d-md-flex">
-              {logged && <NavLink to="/profile">{AuthService.user}</NavLink>}
+              {logged && <NavLink className="nav-link" to="/profile">{AuthService.user}</NavLink>}
             </div>
           </div>
         </div>

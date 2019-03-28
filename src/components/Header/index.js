@@ -6,6 +6,7 @@ import { AuthService } from '../../services/AuthService';
 import './header.css';
 
 function _Header({ logged }) {
+  console.log(AuthService.user);
   return (
     <nav className="header bg-white bsd-1">
       <div class="navbar">
@@ -17,9 +18,11 @@ function _Header({ logged }) {
           </div>
           <div className="form-inline">
             <i className="d-md-none fa fa-bars btn-menu"></i>
-            <div className="d-none d-md-flex">
-              {logged && <NavLink className="nav-link" to="/profile">{AuthService.user}</NavLink>}
-            </div>
+            { AuthService.user === 'admin' &&
+              <div className="d-none d-md-flex">
+                {logged && <NavLink className="nav-link" to="/app/admin">ADMIN</NavLink>}
+              </div>
+            }
           </div>
         </div>
       </div>

@@ -1,0 +1,17 @@
+.card {
+  display: inline-block;
+  width: 50%;
+  margin: 1.0rem;
+}
+
+.card-body {
+  padding: 1.0rem;
+}
+
+.card-title {
+  font-size: 2.0rem;
+}
+
+.card-title .card-sub-title {
+  font-size: 1.0rem;
+}

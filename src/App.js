@@ -5,6 +5,9 @@ import { PrivateRoute } from './containers/CustomRoute';
 import { Home } from './routes/Home';
 import { LeaderBoard } from './routes/LeaderBoard';
 import { History } from './routes/History';
+import Admin from './components/Admin';
+import QuestionStorage from './components/QuestionStorage/QuestionStorage';
+import EditQuestion from './components/EditQuestion';
 
 class App extends Component {
   render() {
@@ -16,6 +19,10 @@ class App extends Component {
             <PrivateRoute path="/app" exact component={Home}></PrivateRoute>
             <PrivateRoute path="/app/leaderboard" component={LeaderBoard}></PrivateRoute>
             <PrivateRoute path="/app/history" component={History}></PrivateRoute>
+            <PrivateRoute path="/app/admin" exact component={Admin}></PrivateRoute>
+            <PrivateRoute path="/app/admin/questions" exact component={QuestionStorage}></PrivateRoute>
+            <PrivateRoute path="/app/admin/questions/add" exact component={EditQuestion}></PrivateRoute>
+            <PrivateRoute path="/app/admin/questions/edit/:questionId" exact component={EditQuestion}></PrivateRoute>
           </Switch>
         </div>
       </>

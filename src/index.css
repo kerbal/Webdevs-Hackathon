@@ -2,6 +2,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  background: #ecf0f1;
 }
 .text-blue {color: blue!important}
 .bg-blue {background-color:blue!important}

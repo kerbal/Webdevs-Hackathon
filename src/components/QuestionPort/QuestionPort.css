@@ -1,0 +1,17 @@
+.edit-question-link {
+  border: none;
+  background: #3498db;
+  color: white;
+  padding: 0.4rem;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.edit-question-link:hover {
+  border: none;
+  background: #3498db;
+  color: white;
+  padding: 0.4rem;
+  text-decoration: none;
+  border-radius: 3px;
+}

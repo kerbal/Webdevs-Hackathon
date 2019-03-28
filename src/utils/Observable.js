@@ -9,9 +9,9 @@ export class Subject {
     }
   }
 
-  broadcast() {
+  broadcast(...args) {
     for(let observe of this.__observes) {
-      observe(arguments);
+      observe(...args);
     }
   }
 }

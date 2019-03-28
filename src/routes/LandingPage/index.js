@@ -49,6 +49,11 @@ export class LandingPage extends React.Component {
       }
     });
   }
+
+  componentWillUnmount () {
+    window.onscroll = null;
+  }
+
   render() {
     const { mobileMenu, isLogin, navbarSticky } = this.state;
     return (

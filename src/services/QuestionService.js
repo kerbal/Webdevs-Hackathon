@@ -1,5 +1,6 @@
 import { LocalStorageService } from "./LocalStorageService";
 import uuid from 'uuid';
+import { Subject } from "../utils/Observable";
 
 const questions = [
   {
@@ -27,6 +28,7 @@ const questions = [
 ];
 
 export class QuestionService {
+  $subject = new Subject();
   constructor () {
     this.Questions = LocalStorageService.ReadData('questions');
     if(this.Questions === null || this.Questions.length === 0) {
@@ -59,6 +61,7 @@ export class QuestionService {
   RemoveQuestion (Id) {
     this.Questions = this.Questions.filter(qs => qs.Id !== Id);
     LocalStorageService.WriteData('questions', this.Questions);
+    this.$subject.broadcast(this.Questions);
   }
 
   DefaultQuestionForm () {

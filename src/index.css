@@ -1,9 +1,14 @@
 @import 'style/_font.css';
 
+html {
+  min-height: 100%;
+  background: #F3f7f7;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
-  background: #ecf0f1;
 }
+
 .text-blue {color: blue!important}
 .bg-blue {background-color:blue!important}
 .bg-light-blue {background-color:#63b2e4!important}

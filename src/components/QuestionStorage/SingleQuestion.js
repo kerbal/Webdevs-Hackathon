@@ -1,6 +1,10 @@
 import React from 'react';
 import { Card } from '../Cards';
 import RadioButton from '../RadioButton';
+import { Link } from 'react-router-dom';
+
+import './EditButton.css';
+import { QuestionStore } from '../../services/QuestionService';
 
 class SingleQuestion extends React.Component {
   constructor (props) {
@@ -8,7 +12,7 @@ class SingleQuestion extends React.Component {
   }
 
   render () {
-    const { Question, Answer, ActualAnswer } = this.props.question;
+    const { Id, Question, Answer, ActualAnswer } = this.props.question;
 
     const AnswerJSX = [];
     for(const answer in Answer) {
@@ -24,14 +28,32 @@ class SingleQuestion extends React.Component {
 
     return (
       <Card>
-        <div className="card-title">
-          {Question}
+        <div className="row">
+          <div className="col-1">
+            <Link to={`/app/admin/questions/edit/${Id}`}>
+              <button className="edit-btn">
+                <i className="fa fa-pencil"/>
+              </button>
+            </Link>
+            <button className="remove-btn" onClick={this.onRemoveQuestion}>
+              <i className="fa fa-trash"/>
+            </button>
+          </div>
+          <div className="col-11">
+            <div className="card-title">
+              {Question}
+            </div>
+            <form action="">
+              {AnswerJSX}
+            </form>    
+          </div>
         </div>
-        <form action="">
-          {AnswerJSX}
-        </form>
       </Card>
     );
+  }
+
+  onRemoveQuestion = () => {
+    QuestionStore.RemoveQuestion(this.props.question.Id);
   }
 }
 

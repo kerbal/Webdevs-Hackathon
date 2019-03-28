@@ -1,0 +1,15 @@
+.edit-btn {
+  border: none;
+  background: #2ecc71 ;
+  color: white;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.remove-btn {
+  border: none;
+  background: #e74c3c;
+  color: white;
+  border-radius: 5px;
+  margin: 5px;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { Header } from './components/Header';
 import { PrivateRoute } from './containers/CustomRoute';
 import { Home } from './routes/Home';
@@ -12,7 +12,7 @@ import EditQuestion from './components/EditQuestion';
 class App extends Component {
   render() {
     return (
-      <>
+      <div>
         <Header></Header>
         <div style={{paddingTop: "70px"}} className="bg-grey">
           <Switch>
@@ -25,7 +25,7 @@ class App extends Component {
             <PrivateRoute path="/app/admin/questions/edit/:questionId" exact component={EditQuestion}></PrivateRoute>
           </Switch>
         </div>
-      </>
+      </div>
     );
   }
 }

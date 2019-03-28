@@ -13,9 +13,11 @@ class RadioButton extends React.Component {
           class="custom-control-input" 
           name={this.props.name} 
           value={this.props.value} 
-          checked={this.props.checked}  
+          checked={this.props.checked}
+          id={this.props.index}
+          onClick={this.props.onClick}
         />
-        <label class="custom-control-label" htmlFor="customRadio">{this.props.label}</label>
+        <label class="custom-control-label" htmlFor={this.props.index}>{this.props.label}</label>
       </div>
     )
   }

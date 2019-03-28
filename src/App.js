@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Switch } from "react-router-dom";
+import {  Switch } from "react-router-dom";
 import { Header } from './components/Header';
 import { PrivateRoute } from './containers/CustomRoute';
 import { Home } from './routes/Home';

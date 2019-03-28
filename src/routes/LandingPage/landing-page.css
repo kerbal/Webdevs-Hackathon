@@ -22,11 +22,6 @@
 .form-group .form-control::placeholder {
   color: #ddd;
 }
-.smallline {
-  width: 100px;
-  height: 5px;
-  display: inline-block;
-}
 .text-pink {
   color: #9c27b0;
 }

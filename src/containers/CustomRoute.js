@@ -7,18 +7,21 @@ function buildCustomRoute(getState, redirectPath) {
     return (
       <Route
         {...rest}
-        render={props =>
-          getState() ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: redirectPath,
-                state: { from: props.location }
-              }}
-            />
+        render={props => {
+          return (
+            getState() ? (
+              <Component {...props} />
+            ) : (
+              <Redirect
+                to={{
+                  pathname: (typeof redirectPath === 'string') ?
+                    redirectPath : redirectPath(),
+                  state: { from: props.location }
+                }}
+              />
+            )
           )
-        }
+        }}
       />
     );
   };
@@ -26,3 +29,14 @@ function buildCustomRoute(getState, redirectPath) {
 
 export const AuthRoute = buildCustomRoute(() => !AuthService.logged, '/app');
 export const PrivateRoute = buildCustomRoute(() => AuthService.logged, '/');
+export const AdminRoute = buildCustomRoute(() => AuthService.logged && AuthService.user.Name === 'admin', 
+  () => {
+    if(AuthService.logged) {
+      if(!AuthService.user.Name) {
+        return '/app';
+      }
+    }
+    else {
+      return '/';
+    }
+  });

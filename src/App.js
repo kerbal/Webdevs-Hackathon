@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <>
         <Header></Header>
-        <div style={{paddingTop: "70px"}}>
+        <div style={{paddingTop: "70px"}} className="bg-grey">
           <Switch>
             <PrivateRoute path="/app" exact component={Home}></PrivateRoute>
             <PrivateRoute path="/app/leaderboard" component={LeaderBoard}></PrivateRoute>

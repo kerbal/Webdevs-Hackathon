@@ -7,17 +7,17 @@ class RadioButton extends React.Component {
 
   render () {
     return (
-      <div class="custom-control custom-radio">
+      <div className="custom-control custom-radio">
         <input 
           type="radio" 
-          class="custom-control-input" 
+          className="custom-control-input" 
           name={this.props.name} 
           value={this.props.value} 
           checked={this.props.checked}
           id={this.props.index}
           onClick={this.props.onClick}
         />
-        <label class="custom-control-label" htmlFor={this.props.index}>{this.props.label}</label>
+        <label className="custom-control-label" htmlFor={this.props.index}>{this.props.label}</label>
       </div>
     )
   }

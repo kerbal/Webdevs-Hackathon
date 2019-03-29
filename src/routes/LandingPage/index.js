@@ -1,17 +1,17 @@
 import React, { createRef } from 'react';
 import cx from 'classnames';
 import scrollToElement from 'scroll-to-element';
-import people from '../../images/landing-page/people2.png';
-import survey from '../../images/landing-page/survey2.png';
-import certification from '../../images/landing-page/certification2.png';
+import people from '../../images/landing-page/people1.png';
+import survey from '../../images/landing-page/survey1.png';
+import certification from '../../images/landing-page/certification1.png';
 
 import './landing-page.css';
 import { AuthService } from '../../services/AuthService';
-import { AuthButton } from '../../components/Buttons';
+import { Title } from '../../components/Title';
 
 function scrollTo(query) {
   scrollToElement(query, {
-    offset: -70,
+    offset: -100,
     ease: 'out-quad',
     duration: 500
   })
@@ -26,7 +26,7 @@ export class LandingPage extends React.Component {
       navbarSticky: false,
     }
     this.setIsLogin = isLogin => this.setState({ isLogin });
-    this.navbarText = () => cx({"text-white": !this.state.navbarSticky}, {'text-blue': this.state.navbarSticky});
+    this.navbarText = () => cx({"text-white": !this.state.navbarSticky}, {'text-cn-red': this.state.navbarSticky});
     this.navbar = createRef();
   }
   componentDidMount() {
@@ -61,7 +61,7 @@ export class LandingPage extends React.Component {
         <nav className={cx('header', {'sticky': navbarSticky})} ref={this.navbar}>
           <div className="navbar">
             <div className="container">
-              <a className={cx("navbar-brand", this.navbarText())} href="/">Thi Hương</a>
+              <a className={cx("navbar-brand font-weight-bold", this.navbarText())} href="/">Thi Hương</a>
               <div className="form-inline my-2 my-lg-0">
                 <i className={cx("d-md-none fa fa-bars btn-menu", this.navbarText())} onClick={_ => this.setMobileMenu(!mobileMenu)}></i>
                 <div className="d-none d-md-flex">
@@ -72,16 +72,16 @@ export class LandingPage extends React.Component {
               </div>
             </div>
           </div>
-          <div className={cx("d-md-none navbar collapse navbar-collapse mobile-menu mt-2", {'show': mobileMenu}, {'sticky': navbarSticky})}>
+          <div className={cx("d-md-none navbar collapse navbar-collapse mobile-menu mt-2", {'show': mobileMenu})}>
             <ul className="navbar-nav container">
               <li className="nav-item">
-                <a className={cx('nav-link', this.navbarText())} href="#" onClick={_ => scrollTo('#form-section')}>Ghi danh / Đăng nhập</a>
+                <a className="nav-link text-cn-red" href="#" onClick={_ => scrollTo('#form-section')}>Ghi danh / Đăng nhập</a>
               </li>
               <li className="nav-item">
-                <a className={cx('nav-link', this.navbarText())} href="#" onClick={_ => scrollTo('#rank-section')}>Bảng xếp hạng</a>
+                <a className="nav-link text-cn-red" href="#" onClick={_ => scrollTo('#rank-section')}>Bảng xếp hạng</a>
               </li>
               <li className="nav-item">
-                <a className={cx('nav-link', this.navbarText())} href="#" onClick={_ => scrollTo('#stat-section')}>Về cuộc thi</a>
+                <a className="nav-link text-cn-red" href="#" onClick={_ => scrollTo('#stat-section')}>Về cuộc thi</a>
               </li>
             </ul>
           </div>
@@ -117,9 +117,9 @@ export class LandingPage extends React.Component {
                     <input className="form-control" type="text" placeholder="Nhập lại mật khẩu" />
                   </div>}
                   <div className="form-group">
-                    <AuthButton className="w-100 btn btn-blue" onClick={_ => AuthService.login()}>
+                    <button className="w-100 btn bg-cn-red text-white" onClick={_ => AuthService.login()}>
                       {isLogin ? "Đăng nhập" : "Ghi danh"}
-                    </AuthButton>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -129,14 +129,11 @@ export class LandingPage extends React.Component {
             <div id="rank-section" className="col-md-6 col-lg-5 pr-md-4 order-2 order-md-1">
               <div className="card w-100">
                 <div className="card-body">
-                <h3 className="text-center text-blue mt-4">Bảng vàng thành tích</h3>
-                <div className="text-center mb-4">
-                  <span className="smallline bg-blue"></span>
-                </div>
+                <Title className="text-center my-4" size="3">Bảng vàng thành tích</Title>
                 {Array.from(Array(10)).map((_, rank) => (
                   <h4 key={rank} className="my-3 form-control hover">{rank+1}. Super Hero {rank+1}</h4>
                 ))}
-                <h4 className="text-center text-blue mt-4">Chi tiết</h4>
+                <h4 className="text-center text-cn-red mt-4">Chi tiết</h4>
                 </div>
               </div>
             </div>
@@ -145,36 +142,33 @@ export class LandingPage extends React.Component {
             </div>
           </div>
           <div id="stat-section" className="row py-md-5 mb-5">
-            <div className="col-12 mb-4">
-              <h3 className="text-center text-blue mt-4">Những con số ấn tượng của cuộc thi</h3>
-              <div className="text-center mb-4">
-                <span className="smallline bg-blue"></span>
-              </div>
+            <div className="col-12 my-4">
+              <Title className="my-4 text-center">Những con số ấn tượng của cuộc thi</Title>
             </div>
             <div className="card-hover col-md-4 d-flex justify-content-center">
               <div className="text-center">
-                <img width="100" src={people} alt="People"/>
+                <img src={people} alt="People"/>
                 <h5 className="my-3"><b className="text-success">10000+</b> </h5>
                 <h5 className="my-3">Sĩ tử đã ghi danh</h5>
               </div>
             </div>
             <div className="card-hover col-md-4 d-flex justify-content-center">
               <div className="text-center">
-                <img width="100" src={survey} alt="Submition" />
+                <img src={survey} alt="Submition" />
                 <h5 className="my-3"><b className="text-success">5000+</b></h5>
                 <h5 className="my-3">Bài thi đã được hoàn thành</h5>
               </div>
             </div>
             <div className="card-hover col-md-4 d-flex justify-content-center">
               <div className="text-center">
-                <img width="100" src={certification} alt="Success" />
+                <img style={{marginLeft:'-10px'}} src={certification} alt="Success" />
                 <h5 className="my-3"><b className="text-success">100+</b></h5>
                 <h5 className="my-3">Hiền tài đã được vinh danh</h5>
               </div>
             </div>
           </div>
         </div>
-        <footer className="mt-5 py-5 text-center text-white bg-light-blue">
+        <footer className="mt-5 py-5 text-center text-white bg-cn-red">
           <h5>Webdevs Hackathon 2019</h5>
           <h5 className="mb-0"><small>&copy; Javascript team</small></h5>
         </footer>

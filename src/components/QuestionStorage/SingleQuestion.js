@@ -53,7 +53,8 @@ class SingleQuestion extends React.Component {
   }
 
   onRemoveQuestion = () => {
-    QuestionStore.RemoveQuestion(this.props.question.Id);
+    // QuestionStore.RemoveQuestion(this.props.question.Id);
+    this.props.removeQuestion(this.props.question.Id);
   }
 }
 

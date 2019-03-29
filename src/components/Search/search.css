@@ -1,0 +1,11 @@
+.search{
+  position: relative;
+}
+.search .fa-search{
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+.search .form-control {
+  padding-left: 45px;
+}

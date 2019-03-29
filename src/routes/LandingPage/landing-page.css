@@ -13,8 +13,8 @@
   color: #333;
 }
 .nav-tabs .nav-link.active {
-  color: var(--cn-red);
-  border-bottom: 2px solid var(--cn-red);
+  color: var(--main-color);
+  border-bottom: 2px solid var(--main-color);
 }
 .form-group .form-control, .btn {
   height: 50px;
@@ -31,6 +31,9 @@
 }
 .form-control.hover:hover {
   background-color: #f9f9f9;
+}
+.lp .form-control:focus {
+  box-shadow: none;
 }
 
 .lp {
@@ -67,13 +70,13 @@
 /* md */
 @media (min-width: 768px) {
   .lp {
-    background-position-y: -1200px;
+    background-position-y: -1300px;
   }
 }
 /* lg */
 @media (min-width: 992px) {
   .lp {
-    background-position-y: -1100px;
+    background-position-y: -1200px;
   }
 }
 

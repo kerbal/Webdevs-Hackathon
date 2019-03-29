@@ -1,33 +1,27 @@
 @import 'style/_font.css';
 
-html {
+body, html {
   min-height: 100%;
   background-color: #F3f7f7;
-}
-
-body {
   font-family: 'Roboto', sans-serif;
+  background-color: #F3f7f7;
 }
 :root{
-  --cn-red: #CB356B;
+  --main-color: #CB356B;
 }
 
-.text-blue {color: blue!important}
-.bg-blue {background-color:blue!important}
-.bg-light-blue {background-color:#63b2e4!important}
 .bg-grey {background-color:#f3f7f7}
-.bg-cn-yellow {background-color:#fffdf4!important}
 .text-cn-yellow {color:#fffdf4!important}
-.bg-cn-red {background-color:var(--cn-red)!important}
-.text-cn-red {color:var(--cn-red)!important}
-.text-light-blue {color:#63b2e4!important}
-.bsd-1 {box-shadow: rgba(0, 0, 0, 0.13) 0px 0px 24px 0px;}
-.bsd-2 {box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);}
-.bsd-3 {box-shadow: 0 6px 16px 0 rgba(115,143,147,.4);}
+.bg-main {background-color:var(--main-color)!important}
+.text-main {color:var(--main-color)!important}
+.text-light-blue {color:#00A9FF!important}
+.bsd-1 {box-shadow: rgba(0, 0, 0, 0.13) 0px 0px 24px 0px!important;}
+.bsd-2 {box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)!important;}
+.bsd-3 {box-shadow: 0 6px 16px 0 rgba(115,143,147,.4)!important;}
 .h-100 {height:100%;}
 .bdr-4 {border-radius:4px!important;}
 .bdr-8 {border-radius:8px!important;}
-.bdr-max {border-radius:20px!important;}
+.bdr-max {border-radius:30px!important;}
 .smallline {
   width: 100px;
   height: 5px;
@@ -38,3 +32,6 @@ body {
 /* .btn-blue {
   box-shadow: 0 6px 16px 0 rgba(0,0,255,.4);
 } */
+.form-control:focus {
+  border: 2px solid var(--main-color);
+}

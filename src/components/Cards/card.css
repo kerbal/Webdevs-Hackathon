@@ -1,12 +1,13 @@
-.card.cn .card-body {
-  padding: 0.9rem;
+.card {
+  position: relative;
 }
-.card.cn .cn-border {
-  border-radius: 8px;
-  border: 2px dashed #bc2326;
-  padding: 1.3rem;
+.card .card-tag {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
-
 .card-title {
   font-size: 1.5rem;
 }

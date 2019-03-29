@@ -8,7 +8,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { Router, Route, Switch} from 'react-router-dom';
+import { Router, Switch} from 'react-router-dom';
 import { AuthRoute, PrivateRoute } from './containers/CustomRoute';
 import { LandingPage } from './routes/LandingPage';
 
@@ -18,12 +18,12 @@ export const history = createHistory();
 class Index extends React.Component {
   render() {
     return (
-      <Route>
+      <>
         <Switch>
           <AuthRoute path="/" exact component={LandingPage}></AuthRoute>
           <PrivateRoute path="/app" component={App}></PrivateRoute>
         </Switch>
-      </Route>
+      </>
     )
   }
 }

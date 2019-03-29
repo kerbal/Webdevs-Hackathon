@@ -9,7 +9,6 @@ class QuestionList extends React.Component {
       questions: QuestionStore.Questions
     }
     QuestionStore.$subject.subscribe((questions) => {
-      console.log(questions);
       this.setState({ questions });
     });
   }
@@ -18,11 +17,18 @@ class QuestionList extends React.Component {
       <div className="row">
         {this.state.questions.map(question => (
           <div className="col-md-12 mt-4">
-            <SingleQuestion question={question}/>
+            <SingleQuestion 
+              question={question}
+              removeQuestion={this.onRemoveQuestion}  
+            />
           </div>
         ))}
       </div>
     );
+  }
+
+  onRemoveQuestion = (id) => {
+    QuestionStore.RemoveQuestion(id);
   }
 }
 

@@ -2,38 +2,14 @@ import { LocalStorageService } from "./LocalStorageService";
 import uuid from 'uuid';
 import { Subject } from "../utils/Observable";
 
-const questions = [
-  {
-    Id: uuid(),
-    Question: '550 : 2 bằng bao nhiêu.',
-    Answer: {
-      A: '225',
-      B: '250',
-      C: '275',
-      D: '300',
-    },
-    ActualAnswer: 'C'
-  },
-  {
-    Id: uuid(),
-    Question: '1 + 1 = ?',
-    Answer: {
-      A: '1',
-      B: '2',
-      C: '3',
-      D: '4',
-    },
-    ActualAnswer: 'C'
-  }
-];
-
 export class QuestionService {
   $subject = new Subject();
   constructor () {
     this.Questions = LocalStorageService.ReadData('questions');
     if(this.Questions === null) {
-      this.Questions = questions;
+      this.GenQuestion();
       LocalStorageService.WriteData('questions', this.Questions);
+      this.Questions = LocalStorageService.ReadData('questions');
     }
   }
 
@@ -64,18 +40,21 @@ export class QuestionService {
     this.$subject.broadcast(this.Questions);
   }
 
-  DefaultQuestionForm () {
+  DefaultQuestionForm (Question = '', Answer = {A: '',B: '',C: '',D: ''}) {
     return ({
       Id: uuid(), 
-      Question: '',
-      Answer: {
-        A: '',
-        B: '',
-        C: '',
-        D: ''
-      },
+      Question,
+      Answer,
       ActualAnswer: ''
     });
+  }
+
+  GenQuestion () {
+    this.Questions = [];
+    for(let i = 0; i < 50; i++) {
+      this.Questions.push(this.DefaultQuestionForm(`Câu hỏi thứ ${i + 1}`));
+    }
+    LocalStorageService.WriteData('questions', this.Questions);
   }
 };
 

@@ -34,7 +34,7 @@ class ExamService {
 
   AddExam (exam) {
     this.Exams.push(exam);
-    LocalStorageService.WriteData(exam);
+    LocalStorageService.WriteData('exams', this.Exams);
   }
 
   EditExam (exam) {
@@ -46,7 +46,7 @@ class ExamService {
         return ex;
       }
     });
-    LocalStorageService.WriteData(exam);
+    LocalStorageService.WriteData('exams', this.Exams);
   }
 
   RemoveExam (id) {

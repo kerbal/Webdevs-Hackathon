@@ -56,7 +56,10 @@ class EditExam extends React.Component {
             </Link>
           }
           <button className="btn-blue border-0" onClick={this.onSaveExam}>
-            Save
+            Lưu
+          </button>
+          <button className="remove-btn" onClick={this.onRemoveExam}>
+            Xóa đề
           </button>
         </Card>
       </div>
@@ -106,6 +109,10 @@ class EditExam extends React.Component {
       ExamStore.EditExam(this.state.exam);
     }
     history.push('/app/admin');
+  }
+
+  onRemoveExam = () => {
+
   }
 }
 

@@ -3,7 +3,6 @@ import { QuestionStore } from '../../services/QuestionService';
 import './QuestionListPanel.css';
 import { Card } from '../Cards';
 
-
 class QuestionListPanel extends React.Component {
   constructor (props) {
     super(props);
@@ -11,19 +10,21 @@ class QuestionListPanel extends React.Component {
 
   render () {
     return (
-      <ul 
-        className="list-group list-group-flush question-list-panel"
-      >
-        {
-          QuestionStore.Questions.map(question => (
-            <li className="list-group-item" onClick={this.onAddQuestion} id={question.Id}>
-              {
-                question.Question
-              }
-            </li>
-          ))
-        }
-      </ul>
+      <Card>
+        <ul 
+          className="list-group list-group-flush question-list-panel"
+        >
+          {
+            QuestionStore.Questions.map(question => (
+              <li className="list-group-item" onClick={this.onAddQuestion} id={question.Id}>
+                {
+                  question.Question
+                }
+              </li>
+            ))
+          }
+        </ul>
+      </Card>
     );
   }
 

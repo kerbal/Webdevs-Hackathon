@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import { Switch } from "react-router-dom";
-import { Card } from '../Cards';
 import QuestionPort from '../QuestionPort';
+import AddExamCard from '../ExamStorage/AddExamCard';
+import ExamList from '../ExamStorage/ExamList';
 
 class Admin extends Component {
   render() {
     return (
       <div className="container">
         <h2>CÂU HỎI</h2>
-        <QuestionPort/>
+        <div className="row">
+          <QuestionPort/>
+        </div>
         <h2>&nbsp;</h2>
         <h2>ĐỀ THI</h2>
+        <div className="row">
+          <AddExamCard/>
+          <ExamList/>
+        </div>
       </div>
     );
   }

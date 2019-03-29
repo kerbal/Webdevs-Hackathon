@@ -31,7 +31,7 @@ export class QuestionService {
   $subject = new Subject();
   constructor () {
     this.Questions = LocalStorageService.ReadData('questions');
-    if(this.Questions === null || this.Questions.length === 0) {
+    if(this.Questions === null) {
       this.Questions = questions;
       LocalStorageService.WriteData('questions', this.Questions);
     }

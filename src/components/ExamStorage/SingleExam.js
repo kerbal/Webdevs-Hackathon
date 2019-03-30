@@ -19,8 +19,12 @@ class SingleExam extends React.Component {
             {Description}
           </div>
           <br></br>
-          <NavLink to={`/app/admin/exams/edit/${Id}`} exact className="edit-question-link">
-            Chỉnh sửa đề
+          <NavLink 
+            // to={`/app/admin/exams/edit/${Id}`} 
+            to={this.props.userView ? `/app/exam/${Id}` : `/app/admin/exams/edit/${Id}`}
+            exact className="edit-question-link"
+          >
+            {this.props.userView ? `Làm đề` : `Chỉnh sửa đề`}
           </NavLink>
         </Card>
       </div>

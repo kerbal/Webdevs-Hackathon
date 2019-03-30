@@ -10,7 +10,7 @@ class ExamList extends React.Component {
   render () {
     return (
       ExamStore.Exams.map(exam => (
-        <SingleExam exam={exam}/>
+        <SingleExam exam={exam} userView={this.props.userView}/>
       ))
     )
   }

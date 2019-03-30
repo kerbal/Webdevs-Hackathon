@@ -6,8 +6,9 @@ import survey from '../../images/landing-page/survey1.png';
 import certification from '../../images/landing-page/certification1.png';
 
 import './landing-page.css';
-import { AuthService } from '../../services/AuthService';
+// import { AuthService } from '../../services/AuthService';
 import { Title } from '../../components/Title';
+import AuthenticationService from '../../services/AuthService';
 
 function scrollTo(query) {
   scrollToElement(query, {
@@ -117,7 +118,7 @@ export class LandingPage extends React.Component {
                     <input className="form-control" type="text" placeholder="Nhập lại mật khẩu" />
                   </div>}
                   <div className="form-group">
-                    <button className="w-100 btn bg-cn-red text-white" onClick={_ => AuthService.login()}>
+                    <button className="w-100 btn bg-cn-red text-white" onClick={_ => AuthenticationService.login({Username: 'admin', Password: '123'})}>
                       {isLogin ? "Đăng nhập" : "Ghi danh"}
                     </button>
                   </div>

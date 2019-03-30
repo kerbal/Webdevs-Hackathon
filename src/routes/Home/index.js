@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from '../../components/Cards';
 import { Title } from '../../components/Title';
+import ExamList from '../../components/ExamStorage/ExamList';
 
 export function Home() {
   return (
@@ -11,7 +12,7 @@ export function Home() {
         </div>
       </div>
       <div className="row">
-        {Array.from(Array(10)).map((_, idx) => (
+        {/* {Array.from(Array(10)).map((_, idx) => (
           <div key={idx} className="col-md-6 mb-5">
             <Card>
               <Card.Title>Hello World {idx+1}</Card.Title>
@@ -21,8 +22,8 @@ export function Home() {
               <button className="btn bg-cn-red text-white mt-3 px-4 bsd-2 bdr-8">Làm bài thi</button>
             </Card>
           </div>
-        ))}
-        
+        ))} */}
+        <ExamList userView/>
       </div>
     </div>
   )

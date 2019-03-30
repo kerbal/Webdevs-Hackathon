@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { AuthService } from '../../services/AuthService';
+// import { AuthService } from '../../services/AuthService';
 import cx from 'classnames';
 
 import './header.css';
+import AuthenticationService from '../../services/AuthService';
 
 export function Header() {
   let [mobileMenu, setMobileMenu] = useState(false);
@@ -21,17 +22,17 @@ export function Header() {
           </div>
           <div className="form-inline">
             { 
-              AuthService.user === 'admin' &&
+              AuthenticationService.user === 'admin' &&
               <div className="d-none d-md-flex">
                 {<NavLink className="text-dark nav-link" to="/app/admin">ADMIN</NavLink>}
               </div>
             }
             <div>
               <div className="text-dark nav-link hover-menu pointer">
-                {AuthService.user}
+                {AuthenticationService.user}
                 <div className="dropdown-menu show">
                   <NavLink className="nav-link text-dark" to="/app/account">Tài khoản</NavLink>
-                  <span className="nav-link pointer" onClick={_ => AuthService.logout()}>Đăng xuất</span>
+                  <span className="nav-link pointer" onClick={_ => AuthenticationService.logout()}>Đăng xuất</span>
                 </div>
               </div>
             </div>

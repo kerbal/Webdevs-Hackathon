@@ -10,6 +10,7 @@ import QuestionStorage from './components/QuestionStorage/QuestionStorage';
 import EditQuestion from './components/EditQuestion';
 import EditExam from './components/EditExam/EditExam';
 import EditExamQuestion from './components/EditExam/EditExamQuestion';
+import DoExam from './components/DoExam/DoExam';
 
 class App extends Component {
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
             <PrivateRoute path="/app/admin/exams/add" exact component={EditExam}></PrivateRoute>
             <PrivateRoute path="/app/admin/exams/edit/:examId" exact component={EditExam}></PrivateRoute>
             <PrivateRoute path="/app/admin/exams/edit/:examId/questions" exact component={EditExamQuestion}></PrivateRoute>
+            <PrivateRoute path="/app/exam/:examId" exact component={DoExam}></PrivateRoute>
           </Switch>
         </div>
       </div>

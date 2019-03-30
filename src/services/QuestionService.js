@@ -8,8 +8,6 @@ export class QuestionService {
     this.Questions = LocalStorageService.ReadData('questions');
     if(this.Questions === null) {
       this.GenQuestion();
-      LocalStorageService.WriteData('questions', this.Questions);
-      this.Questions = LocalStorageService.ReadData('questions');
     }
   }
 

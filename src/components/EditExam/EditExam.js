@@ -64,9 +64,12 @@ class EditExam extends React.Component {
             <Button className="px-4 mr-3 bg-success" onClick={this.onSaveExam}>
               <i className="fa fa-save mr-2"></i>Lưu
             </Button>
-            <Button className="px-4" onClick={this.onRemoveExam}>
-              <i className="fa fa-trash mr-2"></i>Xóa đề
-            </Button>
+            {
+              this.state.mode === 'edit' &&
+              <Button className="px-4" onClick={this.onRemoveExam}>
+                <i className="fa fa-trash mr-2"></i>Xóa đề
+              </Button>
+            }
           </div>
         </Card>
       </div>
@@ -77,14 +80,14 @@ class EditExam extends React.Component {
     if(this.props.match.path.includes('add')) {
       await this.setState(() => ({
         mode: 'add',
-        exam: ExamStore.DefaultExamForm()
+        exam: JSON.parse(JSON.stringify(ExamStore.DefaultExamForm()))
       }));
     }
     else {
       const examId = this.props.match.params.examId;
       await this.setState(() => ({
         mode: 'edit',
-        exam: ExamStore.GetExam(examId)
+        exam: JSON.parse(JSON.stringify(ExamStore.GetExam(examId)))
       }));
     }
     await this.setState(() => ({
@@ -115,11 +118,12 @@ class EditExam extends React.Component {
     else {
       ExamStore.EditExam(this.state.exam);
     }
-    history.push('/admin');
+    history.push('/admin/exams');
   }
 
   onRemoveExam = () => {
-
+    ExamStore.RemoveExam(this.state.exam.Id);
+    history.push('/admin/exams');
   }
 }
 

@@ -29,15 +29,17 @@ class EditExamQuestion extends React.Component {
       </div>
       <div className="row">
         <div className="col-4">
-        
           <NavLink to='/admin/questions/add'>
             <Button className="w-100 mb-4">
               <i className="fa fa-plus mr-2"></i>Thêm câu hỏi mới
             </Button>
           </NavLink>
-          <QuestionListPanel onAddQuestion={this.onAddQuestion}/>
+          <QuestionListPanel 
+            onAddQuestion={this.onAddQuestion}
+            exam={this.state.exam}  
+          />
         </div>
-        <div className="col-8">
+        <div className="col-8 d-flex flex-column">
           <QuestionView
             question={QuestionStore.GetQuestion(this.state.exam.QuestionList[this.state.questionIndex])} 
             removeQuestion={this.removeQuestion}

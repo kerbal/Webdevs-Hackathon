@@ -29,7 +29,7 @@ class QuestionView extends React.Component {
     }
 
     return (
-      <Card className="question-view">
+      <Card className="question-view flex-grow-1">
           <div className="row" style={{height: '100%'}}>
             <div className="col-1">
               <Link to={`/admin/questions/edit/${Id}`}>

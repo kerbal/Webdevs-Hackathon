@@ -1,0 +1,25 @@
+.navigation-bar {
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.navigation-bar .nav {
+  display: inline-block;
+}
+
+.navigation-bar .route:hover {
+  font-weight: 600;
+  color: var(--main-color)
+}
+
+.navigation-bar .route {
+  cursor: pointer;
+  display: inline-block;
+  padding-right: 0.6rem;
+}
+
+.navigation-bar .splitter {
+  display: inline-block;
+  color: var(--main-color);
+  padding-right: 0.6rem;
+}

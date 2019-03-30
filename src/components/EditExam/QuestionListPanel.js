@@ -9,13 +9,18 @@ class QuestionListPanel extends React.Component {
   }
 
   render () {
+    let questions = QuestionStore.Questions;
+    questions = questions.filter(qs => {
+      return !this.props.exam.QuestionList.includes(qs.Id)
+    });
     return (
       <Card>
         <ul 
           className="list-group list-group-flush question-list-panel"
         >
           {
-            QuestionStore.Questions.map(question => (
+            questions.map(question =>
+            (
               <li className="list-group-item" onClick={this.onAddQuestion} id={question.Id}>
                 {
                   question.Question

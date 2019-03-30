@@ -7,6 +7,7 @@ import { LeaderBoardPage } from './routes/LeaderBoard';
 import DoExam from './components/DoExam/DoExam';
 import { Footer } from './components/Footer';
 import History from './components/History/History';
+import NavigationBar from './components/NavigationBar/NavigationBar';
 
 class App extends Component {
   render() {
@@ -14,6 +15,10 @@ class App extends Component {
       <div>
         <Header></Header>
         <div style={{paddingTop: "70px", minHeight: '80vh'}} className="bg-grey">
+          <NavigationBar 
+            pathname={this.props.location.pathname}
+            except={['add', 'edit']}  
+          />
           <Switch>
             <PrivateRoute path="/app" exact component={Home}></PrivateRoute>
             <PrivateRoute path="/app/leaderboard" component={LeaderBoardPage}></PrivateRoute>

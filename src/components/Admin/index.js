@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import QuestionPort from '../QuestionPort';
-import AddExamCard from '../ExamStorage/AddExamCard';
-import ExamList from '../ExamStorage/ExamList';
 import { Card } from '../Cards';
 import { Title } from '../Title';
 import { ExamStore } from '../../services/ExamService';
@@ -13,7 +10,7 @@ class Admin extends Component {
   render() {
     return (
       <div className="container my-4">
-        <div className="row my-5">
+        <div className="row my-4">
           <div className="col-12">
             <Title className="text-center">Trang chủ</Title>
           </div>
@@ -22,7 +19,7 @@ class Admin extends Component {
           <div className="col-md-6 mb-4">
             <Card>
               <Title>Kho câu hỏi</Title>
-              <p className="my-3">Gồm {QuestionStore.Questions.length} Đề thi</p>
+              <p className="my-3">Gồm {QuestionStore.Questions.length} Câu hỏi</p>
               <Link to="/admin/questions">
                 <Button className="px-4">Chi tiết</Button>
               </Link>

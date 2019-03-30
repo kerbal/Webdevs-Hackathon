@@ -13,17 +13,19 @@ class History extends React.Component {
   render () {
     const user = UserService.FetchUser(AuthService.user.Username);
     return (
-      <div className="container my-5">
+      <div className="container mb-5 mt-4">
         <Title className="text-center">
           Kết quả làm bài
         </Title>
         {
           user.Exam.ExamId === '' ? <div className="mt-4">Bạn chưa làm đề nào</div> :
           <div className="row mt-4">
-            <SingleExam
-              exam={ExamStore.GetExam(user.Exam.ExamId)}
-              user={user}
-            />
+            <div class="col-12">
+              <SingleExam
+                exam={ExamStore.GetExam(user.Exam.ExamId)}
+                user={user}
+              />
+            </div>
           </div>
         }
         

@@ -3,6 +3,7 @@ import { ExamStore } from '../../services/ExamService';
 import { Card } from '../Cards';
 import { history } from '../..';
 import { Link } from 'react-router-dom';
+import { Title } from '../Title';
 
 class EditExam extends React.Component {
   constructor (props) {
@@ -24,9 +25,9 @@ class EditExam extends React.Component {
     return (
       <div className="container">
         <Card>
-          <Card.Title>
+          <Title>
             Thêm đề thi
-          </Card.Title>
+          </Title>
           <div className="mt-4">
             <div className="form-group">
               <label>Tên đề thi</label>

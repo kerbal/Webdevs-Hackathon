@@ -37,8 +37,12 @@ class SingleExam extends React.Component {
               <span><i className="fa fa-users text-main mr-2"></i> 100 lượt làm</span>
             </div>
           </div>
-          <NavLink to={`/app/exam/${Id}`}>
-            <Button className="px-4 mt-3">Làm bài thi</Button>
+          <NavLink to={this.props.userView ? `/app/exam/${Id}` : `/app/admin/exams/edit/${Id}`}>
+            <Button className="px-4 mt-3">
+              {
+                this.props.userView ? 'Làm bài' : 'Sửa đề'
+              }
+            </Button>
           </NavLink>
         </Card>
       </div>

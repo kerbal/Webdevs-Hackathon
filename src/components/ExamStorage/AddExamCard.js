@@ -9,7 +9,7 @@ class AddExamCard extends React.Component {
 
   render () {
     return (
-      <div className="col-4">
+      <div className="col-12 my-3">
         <Link to='/app/admin/exams/add'>
           <Card>
             <div className="container">

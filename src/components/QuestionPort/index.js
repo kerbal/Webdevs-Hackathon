@@ -4,24 +4,26 @@ import { Card } from '../Cards';
 
 import './QuestionPort.css';
 import { QuestionStore } from '../../services/QuestionService';
+import { Title } from '../Title';
+import { Button } from '../Buttons';
 
 class QuestionPort extends React.Component {
   render () {
     return (
-      <div className="col-4">
-        {/* <NavLink to="/ap/admin/questions"> */}
-          <Card>
-            <Card.Title>
-              Kho câu hỏi
-            </Card.Title>
-            <div className="mt-3 mb-3">
-              Gồm {QuestionStore.Questions.length} câu hỏi
-            </div>
-            <NavLink to="/app/admin/questions" exact className="edit-question-link">
+      <div className="col-6">
+        <Card>
+          <Title>
+            Kho câu hỏi
+          </Title>
+          <div className="mt-3 mb-3">
+            Gồm {QuestionStore.Questions.length} câu hỏi
+          </div>
+          <NavLink to="/app/admin/questions" exact>
+            <Button>
               Chỉnh sửa câu hỏi
-            </NavLink>
-          </Card>
-        {/* </NavLink> */}
+            </Button>
+          </NavLink>
+        </Card>
       </div>
     )
   }

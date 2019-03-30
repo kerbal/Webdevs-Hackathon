@@ -3,6 +3,7 @@ import { QuestionStore } from '../../services/QuestionService';
 import { Card } from '../Cards';
 import RadioButton from '../RadioButton';
 import { history } from '../..';
+import { Title } from '../Title';
 
 class EditQuestion extends React.Component {
   constructor (props) {
@@ -41,9 +42,9 @@ class EditQuestion extends React.Component {
     return (
       <div className="container">
         <Card>
-          <Card.Title>
+          <Title>
             Thêm câu hỏi
-          </Card.Title>
+          </Title>
           <div className="mt-4">
             <div className="form-group">
               <label>Câu hỏi</label>

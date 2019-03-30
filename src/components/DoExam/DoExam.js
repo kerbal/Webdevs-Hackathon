@@ -4,6 +4,7 @@ import AuthenticationService from '../../services/AuthService';
 import { ExamStore } from '../../services/ExamService';
 import { QuestionStore } from '../../services/QuestionService';
 import QuestionBrowser from '../EditExam/QuestionBrowser';
+import { Button } from '../Buttons';
 
 class DoExam extends React.Component {
   constructor (props) {
@@ -34,9 +35,9 @@ class DoExam extends React.Component {
           questions={exam.QuestionList}
           onChangeQuestion={this.onChangeQuestion}
         />
-        <button>
+        <Button onClick={this.onSubmit}>
           Finish
-        </button>
+        </Button>
       </div>
     )
   }
@@ -78,7 +79,16 @@ class DoExam extends React.Component {
   }
 
   onSubmit = () => {
-    
+    const {user, exam} = this.state;
+    let score = 0;
+    for(const questionId of exam.QuestionList) {
+      const question = QuestionStore.GetQuestion(questionId);
+      if(user.Exam.Answer[questionId] === question.ActualAnswer) {
+        score++;
+      }
+    }
+    user.Exam.Score = score;
+    AuthenticationService.EditUser(user);
   }
 }
 

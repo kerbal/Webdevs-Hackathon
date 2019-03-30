@@ -16,9 +16,9 @@ class QuestionStorage extends React.Component {
         </div>
         <div className="row my-4">
           <div className="col-12 mb-4">
-            <Link to="/app/admin/questions/add">
-              <Button>
-                <i className="fa fa-plus"></i> Thêm câu hỏi
+            <Link to="/admin/questions/add">
+              <Button className="mw-100 px-4">
+                <i className="fa fa-plus mr-2"></i> Thêm câu hỏi
               </Button>
             </Link>
           </div>

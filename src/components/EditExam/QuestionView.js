@@ -32,7 +32,7 @@ class QuestionView extends React.Component {
       <Card className="question-view">
           <div className="row" style={{height: '100%'}}>
             <div className="col-1">
-              <Link to={`/app/admin/questions/edit/${Id}`}>
+              <Link to={`/admin/questions/edit/${Id}`}>
                 <button className="edit-btn">
                   <i className="fa fa-pencil"/>
                 </button>

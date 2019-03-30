@@ -36,15 +36,19 @@ export function Home() {
   }
   else {
     return (
-      <div className="container">
-        <Title>
-          Bạn đã hoàn thành kì thi
-        </Title>
-        <NavLink to='/app/history'>
-          <Button>
-            Xem kết quả
-          </Button>
-        </NavLink>
+      <div className="container my-5 d-flex align-items-center justify-content-center" style={{ height: '70vh' }}>
+        <div className="text-center">
+          <Title className="text-center">
+            Chúc mừng bạn đã hoàn thành kì thi
+          </Title>
+          <div className="text-center">
+            <NavLink to='/app/history'>
+              <Button className="mt-4 px-4">
+                Xem kết quả
+              </Button>
+            </NavLink>
+          </div>
+        </div>
       </div>
     )
   }

@@ -14,6 +14,7 @@ import { Footer } from '../../components/Footer';
 import { AuthService } from '../../services/AuthService';
 import { Dialog } from '../../components/Dialog';
 import { LeaderBoardPage } from '../LeaderBoard';
+import { UserService } from '../../services/UserService';
 
 function scrollTo(query) {
   scrollToElement(query, {
@@ -165,8 +166,15 @@ export class LandingPage extends React.Component {
             <div id="rank-section" className="col-md-6 col-lg-5 pr-md-4 order-2 order-md-1">
               <Card>
                 <Title className="text-center my-4" size="3">Bảng vàng thành tích</Title>
-                {Array.from(Array(10)).map((_, rank) => (
-                  <h4 key={rank} className="my-3 form-control px-3 bdr-max hover">{rank+1}. Super Hero {rank+1}</h4>
+                {UserService.Users
+                .filter(user => !user.IsAdmin)
+                .sort((a, b) => a.Exam.Score > b.Exam.Score)
+                .slice(0, 10)
+                .map((user) => (
+                  <h4 key={user.Username} className="my-3 form-control px-3 bdr-max hover">
+                    <span>{user.Name}</span>
+                    <span className="float-right">{user.Exam.Score}</span>
+                  </h4>
                 ))}
                 <Button className="w-100 mt-2 mb-3" onClick={_ => this.setDetailLB(true)}>
                   Chi tiết

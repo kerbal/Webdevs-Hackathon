@@ -29,14 +29,14 @@ class SingleQuestion extends React.Component {
     return (
       <Card>
         <div className="row">
-          <div className="col-1">
-            <Link to={`/app/admin/questions/edit/${Id}`}>
+          <div className="col-12 col-md-1 mb-3">
+            <Link to={`/admin/questions/edit/${Id}`}>
               <button className="edit-btn">
-                <i className="fa fa-pencil"/>
+                <i className="fa fa-pencil p-1"/>
               </button>
             </Link>
             <button className="remove-btn" onClick={this.onRemoveQuestion}>
-              <i className="fa fa-trash"/>
+              <i className="fa fa-trash p-1"/>
             </button>
           </div>
           <div className="col-11">

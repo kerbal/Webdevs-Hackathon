@@ -30,7 +30,7 @@ class EditExamQuestion extends React.Component {
       <div className="row">
         <div className="col-4">
         
-          <NavLink to='/app/admin/questions/add'>
+          <NavLink to='/admin/questions/add'>
             <Button className="w-100 mb-4">
               <i className="fa fa-plus mr-2"></i>Thêm câu hỏi mới
             </Button>

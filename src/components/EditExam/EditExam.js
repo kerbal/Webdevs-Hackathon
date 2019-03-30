@@ -55,7 +55,7 @@ class EditExam extends React.Component {
           <div className="mt-4">
             {
               this.state.mode === 'edit' &&
-              <Link className="mr-3" to={`/app/admin/exams/edit/${this.state.exam.Id}/questions`}>
+              <Link className="mr-3" to={`/admin/exams/edit/${this.state.exam.Id}/questions`}>
                 <Button className="bg-primary">
                   <i className="fa fa-question-circle mr-2"></i>Sửa câu hỏi
                 </Button>
@@ -115,7 +115,7 @@ class EditExam extends React.Component {
     else {
       ExamStore.EditExam(this.state.exam);
     }
-    history.push('/app/admin');
+    history.push('/admin');
   }
 
   onRemoveExam = () => {

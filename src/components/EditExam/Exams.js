@@ -16,9 +16,9 @@ export class Exams extends React.Component {
         </div>
         <div className="row my-4">
           <div className="col-12 mb-4">
-            <Link to="/app/admin/exams/add">
-              <Button>
-                <i className="fa fa-plus"></i> Thêm đề
+            <Link to="/admin/exams/add">
+              <Button className="mw-100 px-4">
+                <i className="fa fa-plus mr-2"></i> Thêm đề
               </Button>
             </Link>
           </div>

@@ -6,10 +6,11 @@ import 'font-awesome/css/font-awesome.min.css';
 import './index.css';
 
 import App from './App';
+import Admin from './Admin';
 import * as serviceWorker from './serviceWorker';
 
 import { Router, Switch} from 'react-router-dom';
-import { AuthRoute, PrivateRoute } from './containers/CustomRoute';
+import { AuthRoute, PrivateRoute, AdminRoute } from './containers/CustomRoute';
 import { LandingPage } from './routes/LandingPage';
 
 const createHistory = require('history').createBrowserHistory;
@@ -22,6 +23,7 @@ class Index extends React.Component {
         <Switch>
           <AuthRoute path="/" exact component={LandingPage}></AuthRoute>
           <PrivateRoute path="/app" component={App}></PrivateRoute>
+          <AdminRoute path="/admin" component={Admin}></AdminRoute>
         </Switch>
       </>
     )

@@ -14,7 +14,7 @@ class SingleExam extends React.Component {
   render () {
     const { Id, Name, Description, UserCount } = this.props.exam;
     return (
-      <div className="col-6">
+      <div className="col-md-6 mb-4 mb-md-0">
         <Card className="bsd-3 pointer">
           <Title size="3">{Name}</Title>
           {
@@ -40,7 +40,7 @@ class SingleExam extends React.Component {
               </span>
             </div>
           </div>
-          <NavLink to={this.props.userView ? `/app/exam/${Id}` : `/app/admin/exams/edit/${Id}`}>
+          <NavLink to={this.props.userView ? `/app/exam/${Id}` : `/admin/exams/edit/${Id}`}>
             <Button className="px-4 mt-3">
               {
                 this.props.userView ? 

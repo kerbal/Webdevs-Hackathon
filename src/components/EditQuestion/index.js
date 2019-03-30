@@ -118,7 +118,7 @@ class EditQuestion extends React.Component {
       QuestionStore.EditQuestion(this.state.question);
     }
     console.log(document.referrer);
-    history.push('/app/admin/questions');
+    history.push('/admin/questions');
   }
 }
 

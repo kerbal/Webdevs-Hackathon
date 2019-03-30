@@ -9,6 +9,7 @@ function buildCustomRoute(getState, redirectPath) {
       <Route
         {...rest}
         render={props => {
+          console.log(Component);
           return (
             getState() ? (
               <Component {...props} />
@@ -28,16 +29,25 @@ function buildCustomRoute(getState, redirectPath) {
   };
 }
 
-export const AuthRoute = buildCustomRoute(() => !AuthService.logged(), '/app');
-export const PrivateRoute = buildCustomRoute(() => AuthService.logged(), '/');
-export const AdminRoute = buildCustomRoute(() => AuthService.logged() && AuthService.user.IsAdmin, 
-  () => {
-    if(AuthService.logged()) {
-      if(!AuthService.user.IsAdmin) {
-        return '/app';
-      }
-    }
-    else {
-      return '/';
-    }
-  });
+export const AuthRoute = buildCustomRoute(() => !AuthService.logged(), () => {
+  if (AuthService.user.IsAdmin) {
+    return '/admin';
+  } else {
+    return '/app';
+  }
+});
+export const PrivateRoute = buildCustomRoute(() => AuthService.logged() && !AuthService.user.IsAdmin, () => {
+  if (AuthService.logged()) {
+    return '/admin';
+  } else {
+    return '/'
+  }
+});
+
+export const AdminRoute = buildCustomRoute(() => AuthService.logged() && AuthService.user.IsAdmin, () => {
+  if (AuthService.logged()) {
+    return '/app';
+  } else {
+    return '/';
+  }
+});

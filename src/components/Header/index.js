@@ -13,13 +13,14 @@ export function Header() {
         <div className="container wrapper">
           <i className="d-md-none fa fa-bars btn-menu text-main px-0" onClick={_ => setMobileMenu(!mobileMenu)}></i>
           <div className="h-100">
-            <Link className="text-main font-weight-bold link pl-0 h-100 pr-md-3" to="/app">Thi Hương</Link>
+            <Link className="text-main font-weight-bold link pl-0 h-100 pr-md-3" 
+              to={!AuthService.user.IsAdmin ? "/app" : "/admin"}>Thi Hương</Link>
             <div className="h-100 d-none d-md-inline-block">
             {AuthService.user.IsAdmin ?
               <>
-                <NavLink className="ml-5 link navlink h-100 text-dark" to="/app/admin" activeClassName="active" exact>Trang chủ</NavLink>
-                <NavLink className="ml-5 link navlink h-100 text-dark" to="/app/admin/questions" activeClassName="active">Kho câu hỏi</NavLink>
-                <NavLink className="ml-5 link navlink h-100 text-dark" to="/app/admin/exams" activeClassName="active">Kho đề</NavLink>
+                <NavLink className="ml-5 link navlink h-100 text-dark" to="/admin" activeClassName="active" exact>Trang chủ</NavLink>
+                <NavLink className="ml-5 link navlink h-100 text-dark" to="/admin/questions" activeClassName="active">Kho câu hỏi</NavLink>
+                <NavLink className="ml-5 link navlink h-100 text-dark" to="/admin/exams" activeClassName="active">Kho đề</NavLink>
               </> :
               <>
                 <NavLink className="ml-5 link navlink h-100 text-dark" to="/app" activeClassName="active" exact>Trang chủ</NavLink>
@@ -27,7 +28,6 @@ export function Header() {
                 <NavLink className="ml-5 link navlink h-100 text-dark" to="/app/leaderboard" activeClassName="active">Bảng vàng</NavLink>
               </>
             }
-             
             </div>
           </div>
           <div className="form-inline">
@@ -39,9 +39,6 @@ export function Header() {
                   <span className="nav-link d-block d-md-none text-center bg-dark-grey">
                     {AuthService.user.Username}
                   </span>
-                  <NavLink className="nav-link text-dark" to="/app/account">
-                    <i className="fa fa-user text-main mr-3"></i>Tài khoản
-                  </NavLink>
                   <span className="nav-link pointer" onClick={_ => AuthService.logout()}>
                     <i className="fa fa-sign-out mr-3 text-main"></i>Đăng xuất
                   </span>
@@ -53,15 +50,30 @@ export function Header() {
       </div>
       <div className={cx("d-md-none navbar collapse navbar-collapse mobile-menu mt-2 ", {'show': mobileMenu})}>
         <ul className="navbar-nav container">
-          <li className="nav-item">
-            <NavLink className="nav-link text-main" to="/app" exact activeClassName="active">Trang chủ</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link text-main" to="/app/history" activeClassName="active">Lịch sử</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link text-main" to="/app/leaderboard" activeClassName="active">Bảng vàng</NavLink>
-          </li>
+          {AuthService.user.IsAdmin ?
+            <>
+              <li className="nav-item">
+                <NavLink className="nav-link text-main" to="/app" exact activeClassName="active">Trang chủ</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-main" to="/admin/questions" activeClassName="active">Kho câu hỏi</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-main" to="/admin/exams" activeClassName="active">Kho đề</NavLink>
+              </li>
+            </> :
+            <>
+              <li className="nav-item">
+                <NavLink className="nav-link text-main" to="/app" exact activeClassName="active">Trang chủ</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-main" to="/app/history" activeClassName="active">Lịch sử</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-main" to="/app/leaderboard" activeClassName="active">Bảng vàng</NavLink>
+              </li>
+            </>
+          }
         </ul>
       </div>
     </nav>

@@ -18,7 +18,7 @@ class _AuthService {
       sessionStorage.setItem('wdh_js_user', JSON.stringify(user));
       this.$auth.broadcast(AuthService.logged);
       if (user.IsAdmin) {
-        history.push('/app/admin');
+        history.push('/admin');
       } else {
         history.push('/app');
       }

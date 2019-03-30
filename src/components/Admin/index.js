@@ -7,6 +7,7 @@ import { Title } from '../Title';
 import { ExamStore } from '../../services/ExamService';
 import { Button } from '../Buttons';
 import { QuestionStore } from '../../services/QuestionService';
+import { Link } from 'react-router-dom';
 
 class Admin extends Component {
   render() {
@@ -18,18 +19,22 @@ class Admin extends Component {
           </div>
         </div>
         <div className="row my-5">
-          <div className="col-md-6">
+          <div className="col-md-6 mb-4">
             <Card>
               <Title>Kho câu hỏi</Title>
               <p className="my-3">Gồm {QuestionStore.Questions.length} Đề thi</p>
-              <Button className="px-4">Chi tiết</Button>
+              <Link to="/admin/questions">
+                <Button className="px-4">Chi tiết</Button>
+              </Link>
             </Card>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 mb-4">
             <Card>
               <Title>Kho đề</Title>
               <p className="my-3">Gồm {ExamStore.Exams.length} Đề thi</p>
-              <Button className="px-4">Chi tiết</Button>
+              <Link to="/admin/exams">
+                <Button className="px-4">Chi tiết</Button>
+              </Link>
             </Card>
           </div>
         </div>

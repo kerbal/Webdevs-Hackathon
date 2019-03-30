@@ -15,7 +15,7 @@ class QuestionPort extends React.Component {
         <div className="mt-3 mb-3">
           Gồm {QuestionStore.Questions.length} câu hỏi
         </div>
-        <NavLink to="/app/admin/questions" exact>
+        <NavLink to="/admin/questions" exact>
           <Button>
             Chỉnh sửa câu hỏi
           </Button>

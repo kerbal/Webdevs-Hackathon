@@ -14,7 +14,7 @@ class History extends React.Component {
     const user = UserService.FetchUser(AuthService.user.Username);
     return (
       <div className="container my-5">
-        <Title>
+        <Title className="text-center">
           Kết quả làm bài
         </Title>
         {

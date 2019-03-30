@@ -64,9 +64,12 @@ class EditExam extends React.Component {
             <Button className="px-4 mr-3 bg-success" onClick={this.onSaveExam}>
               <i className="fa fa-save mr-2"></i>Lưu
             </Button>
-            <Button className="px-4" onClick={this.onRemoveExam}>
-              <i className="fa fa-trash mr-2"></i>Xóa đề
-            </Button>
+            {
+              this.state.mode === 'edit' &&
+              <Button className="px-4" onClick={this.onRemoveExam}>
+                <i className="fa fa-trash mr-2"></i>Xóa đề
+              </Button>
+            }
           </div>
         </Card>
       </div>

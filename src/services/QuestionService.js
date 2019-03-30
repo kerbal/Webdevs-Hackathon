@@ -1,6 +1,7 @@
 import { LocalStorageService } from "./LocalStorageService";
 import uuid from 'uuid';
 import { Subject } from "../utils/Observable";
+import { ExamStore } from "./ExamService";
 
 export class QuestionService {
   $subject = new Subject();
@@ -36,6 +37,10 @@ export class QuestionService {
     this.Questions = this.Questions.filter(qs => qs.Id !== Id);
     LocalStorageService.WriteData('questions', this.Questions);
     this.$subject.broadcast(this.Questions);
+    for(const exam of ExamStore.Exams) {
+      exam.QuestionList = exam.QuestionList.filter(qs => qs !== Id);
+    }
+    LocalStorageService.WriteData('exams', ExamStore.Exams);
   }
 
   DefaultQuestionForm (Question = '', Answer = {A: 'Đáp án A',B: 'Đáp án B',C: 'Đáp án C',D: 'Đáp án D'}, ActualAnswer = 'A') {

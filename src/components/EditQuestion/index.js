@@ -64,6 +64,12 @@ class EditQuestion extends React.Component {
           <Button className="w-100 bg-success mt-3" onClick={this.onSaveQuestion}>
             <i className="fa fa-save mr-2"></i> Lưu lại
           </Button>
+          {
+            this.state.mode === 'edit' &&
+            <Button className="w-100 bg-danger mt-3" onClick={this.onRemoveQuestion}>
+              <i className="fa fa-save mr-2"></i> Xóa câu hỏi
+            </Button>
+          }
         </Card>
       </div>
     )
@@ -117,7 +123,16 @@ class EditQuestion extends React.Component {
     else {
       QuestionStore.EditQuestion(this.state.question);
     }
-    console.log(document.referrer);
+    if(document.referrer.includes('/admin/exams/edit')) {
+      history.push(document.referrer);
+    }
+    else {
+      history.push('/app/admin/questions');
+    }
+  }
+
+  onRemoveQuestion = () => {
+    QuestionStore.RemoveQuestion(this.state.question.Id);
     history.push('/app/admin/questions');
   }
 }

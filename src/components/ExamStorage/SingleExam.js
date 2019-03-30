@@ -32,16 +32,12 @@ class SingleExam extends React.Component {
                 <i className="fa fa-question-circle text-main mr-2"></i>
                 {this.props.exam.QuestionList.length}
               </span>
-              <span className="mr-4"><i className="fa fa-hourglass-half text-main mr-2"></i> 60 phút</span>
-              <span className="mr-4"><i className="fa fa-eye text-main mr-2"></i> 100 lượt xem</span>
               <span><i className="fa fa-users text-main mr-2"></i> 100 lượt làm</span>
             </div>
           </div>
           <NavLink to={this.props.userView ? `/app/exam/${Id}` : `/app/admin/exams/edit/${Id}`}>
             <Button className="px-4 mt-3">
-              {
-                this.props.userView ? 'Làm bài' : 'Sửa đề'
-              }
+              {this.props.userView ? 'Làm bài' : 'Sửa đề'}
             </Button>
           </NavLink>
         </Card>

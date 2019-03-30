@@ -13,7 +13,7 @@ export function Pagination({ total, current, pageSize, className }) {
       {Array.from(Array(pages)).map((_, idx) => (
         <li key={"pg-"+idx+1} 
           className="page-item">
-          <a className={cx("page-link text-main pointer font-weight-bold", {"bg-grey": current===idx+1})}>{idx+1}</a>
+          <a className={cx("page-link text-main pointer font-weight-bold", {"bg-dark-grey": current===idx+1})}>{idx+1}</a>
         </li>
       ))}
       <li className="page-item">

@@ -11,8 +11,9 @@ body, html {
 }
 
 .bg-grey {background-color:#f3f7f7}
+.bg-dark-grey { background-color:#e9ecef; }
 .text-cn-yellow {color:#fffdf4!important}
-.bg-main {background-color:var(--main-color)!important}
+.bg-main {background-color:var(--main-color);}
 .text-main {color:var(--main-color)!important}
 .text-light-blue {color:#00A9FF!important}
 .bsd-1 {box-shadow: rgba(0, 0, 0, 0.13) 0px 0px 24px 0px!important;}
@@ -34,4 +35,10 @@ body, html {
 } */
 .form-control:focus {
   border: 2px solid var(--main-color);
+}
+textarea.form-control {
+  min-height: 100px;
+}
+input.form-control:focus, textarea.form-control:focus {
+  box-shadow: none;
 }

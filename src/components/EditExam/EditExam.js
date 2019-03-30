@@ -4,6 +4,7 @@ import { Card } from '../Cards';
 import { history } from '../..';
 import { Link } from 'react-router-dom';
 import { Title } from '../Title';
+import { Button } from '../Buttons';
 
 class EditExam extends React.Component {
   constructor (props) {
@@ -23,15 +24,14 @@ class EditExam extends React.Component {
     const { Name, Description } = this.state.exam;
 
     return (
-      <div className="container">
+      <div className="container my-4">
         <Card>
-          <Title>
-            Thêm đề thi
-          </Title>
+          <Title>Thêm đề thi</Title>
           <div className="mt-4">
             <div className="form-group">
               <label>Tên đề thi</label>
-              <textarea className="form-control"
+              <input className="form-control"
+                type="text"
                 value={Name}
                 name="Name"
                 onChange={this.onInfoChange}
@@ -48,20 +48,22 @@ class EditExam extends React.Component {
               />
             </div>
           </div>
-          {
-            this.state.mode === 'edit' &&
-            <Link to={`/app/admin/exams/edit/${this.state.exam.Id}/questions`}>
-              <button className="btn-blue border-0 mr-2">
-                Sửa câu hỏi
-              </button>
-            </Link>
-          }
-          <button className="btn-blue border-0" onClick={this.onSaveExam}>
-            Lưu
-          </button>
-          <button className="remove-btn" onClick={this.onRemoveExam}>
-            Xóa đề
-          </button>
+          <div className="mt-4">
+            {
+              this.state.mode === 'edit' &&
+              <Link className="mr-3" to={`/app/admin/exams/edit/${this.state.exam.Id}/questions`}>
+                <Button className="bg-primary">
+                  <i className="fa fa-question-circle mr-2"></i>Sửa câu hỏi
+                </Button>
+              </Link>
+            }
+            <Button className="px-4 mr-3 bg-success" onClick={this.onSaveExam}>
+              <i className="fa fa-save mr-2"></i>Lưu
+            </Button>
+            <Button className="px-4" onClick={this.onRemoveExam}>
+              <i className="fa fa-trash mr-2"></i>Xóa đề
+            </Button>
+          </div>
         </Card>
       </div>
     );

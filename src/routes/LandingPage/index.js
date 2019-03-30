@@ -11,7 +11,9 @@ import { Title } from '../../components/Title';
 import { Button } from '../../components/Buttons';
 import { Card } from '../../components/Cards';
 import { Footer } from '../../components/Footer';
-import AuthenticationService from '../../services/AuthService';
+import { AuthService } from '../../services/AuthService';
+import { Dialog } from '../../components/Dialog';
+import { LeaderBoardPage } from '../LeaderBoard';
 
 function scrollTo(query) {
   scrollToElement(query, {
@@ -28,11 +30,14 @@ export class LandingPage extends React.Component {
       isLogin: false,
       mobileMenu: false,
       navbarSticky: false,
+      detailLB: false,
     }
     this.setIsLogin = isLogin => this.setState({ isLogin });
+    this.setDetailLB = detailLB => this.setState({ detailLB });
     this.navbarText = () => cx({"text-white": !this.state.navbarSticky}, {'text-main': this.state.navbarSticky});
     this.navbar = createRef();
   }
+
   componentDidMount() {
     window.onscroll = () => {
       var sticky = this.navbar.current.offsetTop;
@@ -41,6 +46,7 @@ export class LandingPage extends React.Component {
       });
     }
   }
+
   setMobileMenu = (mobileMenu) => {
     this.setState({ mobileMenu }, () => {
       if (mobileMenu) {
@@ -58,10 +64,36 @@ export class LandingPage extends React.Component {
     window.onscroll = null;
   }
 
+  setInput = (field) => {
+    return e => {
+      this.setState({
+        [field]: e.target.value
+      });
+    }
+  }
+
+  SubmitForm = e => {
+    e.preventDefault();
+    if (this.state.isLogin) {
+      this.Auth();
+    }
+  }
+
+  Auth = () => {
+    let { Username, Password } = this.state;
+    if (!Username || !Password) {
+      AuthService.login(Username, Password);
+    }
+  }
+
   render() {
-    const { mobileMenu, isLogin, navbarSticky } = this.state;
+    const { detailLB, mobileMenu, isLogin, navbarSticky } = this.state;
     return (
       <div className="lp">
+        {detailLB && 
+        <Dialog onWrapperClick={_ => this.setDetailLB(false)}>
+          <LeaderBoardPage></LeaderBoardPage>
+        </Dialog>}
         <nav className={cx('header', {'sticky': navbarSticky})} ref={this.navbar}>
           <div className="navbar">
             <div className="container">
@@ -98,32 +130,34 @@ export class LandingPage extends React.Component {
             </div>
             <div id="form-section" className="col-md-6 col-lg-5 pt-5 pt-md-0 pl-md-4">
               <Card>
-                <ul className="nav nav-tabs mb-5">
-                  <li className="w-50 nav-item text-center">
-                    <a className={cx("nav-link", {active: !isLogin })} href="#" onClick={_ => this.setIsLogin(false)}>Ghi danh</a>
-                  </li>
-                  <li className="w-50 nav-item text-center">
-                    <a className={cx("nav-link", {active: isLogin })} href="#" onClick={_ => this.setIsLogin(true)}>Đăng nhập</a>
-                  </li>
-                </ul>
-                <div className="form-group mb-4">
-                  <label htmlFor="">Tên tài khoản</label>
-                  <input className="form-control px-3 bdr-max" type="text" placeholder="Tên tài khoản" />
-                </div>
-                <div className="form-group mb-4">
-                  <label htmlFor="">Mật khẩu</label>
-                  <input className="form-control px-3 bdr-max" type="text" placeholder="Mật khẩu" />
-                </div>
-                {!isLogin &&
-                <div className="form-group mb-4">
-                  <label htmlFor="">Xác nhận mật khẩu</label>
-                  <input className="form-control px-3 bdr-max" type="text" placeholder="Nhập lại mật khẩu" />
-                </div>}
-                <div className="form-group">
-                  <Button className="w-100" onClick={_ => AuthenticationService.login({Username: 'admin', Password: '123'})}>
-                    {isLogin ? "Đăng nhập" : "Ghi danh"}
-                  </Button>
-                </div>
+                <form onSubmit={this.SubmitForm}>
+                  <ul className="nav nav-tabs mb-5">
+                    <li className="w-50 nav-item text-center">
+                      <a className={cx("nav-link", {active: !isLogin })} href="#" onClick={_ => this.setIsLogin(false)}>Ghi danh</a>
+                    </li>
+                    <li className="w-50 nav-item text-center">
+                      <a className={cx("nav-link", {active: isLogin })} href="#" onClick={_ => this.setIsLogin(true)}>Đăng nhập</a>
+                    </li>
+                  </ul>
+                  <div className="form-group mb-4">
+                    <label htmlFor="">Tên tài khoản</label>
+                    <input className="form-control px-3 bdr-max" type="text" placeholder="Tên tài khoản" onChange={this.setInput('Username')} />
+                  </div>
+                  <div className="form-group mb-4">
+                    <label htmlFor="">Mật khẩu</label>
+                    <input className="form-control px-3 bdr-max" type="text" placeholder="Mật khẩu" onChange={this.setInput('Password')} />
+                  </div>
+                  {!isLogin &&
+                  <div className="form-group mb-4">
+                    <label htmlFor="">Xác nhận mật khẩu</label>
+                    <input className="form-control px-3 bdr-max" type="text" placeholder="Nhập lại mật khẩu" />
+                  </div>}
+                  <div className="form-group">
+                    <Button type="submit" className="w-100">
+                      {isLogin ? "Đăng nhập" : "Ghi danh"}
+                    </Button>
+                  </div>
+                </form>
               </Card>
             </div>
           </div>
@@ -134,7 +168,7 @@ export class LandingPage extends React.Component {
                 {Array.from(Array(10)).map((_, rank) => (
                   <h4 key={rank} className="my-3 form-control px-3 bdr-max hover">{rank+1}. Super Hero {rank+1}</h4>
                 ))}
-                <Button className="w-100 mt-2 mb-3">
+                <Button className="w-100 mt-2 mb-3" onClick={_ => this.setDetailLB(true)}>
                   Chi tiết
                 </Button>
               </Card>

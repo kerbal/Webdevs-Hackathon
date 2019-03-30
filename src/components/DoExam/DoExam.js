@@ -1,6 +1,6 @@
 import React from 'react';
 import Question from './Question';
-import AuthenticationService from '../../services/AuthService';
+import { AuthService } from '../../services/AuthService';
 import { ExamStore } from '../../services/ExamService';
 import { QuestionStore } from '../../services/QuestionService';
 import QuestionBrowser from '../EditExam/QuestionBrowser';
@@ -43,7 +43,7 @@ class DoExam extends React.Component {
   }
   
   async componentWillMount () {
-    const user = AuthenticationService.GetUser(AuthenticationService.user);
+    const user = AuthService.GetUser(AuthService.user);
     const exam = ExamStore.GetExam(this.props.match.params.examId);
     if(exam && user.Exam.ExamId === '') {
       user.Exam.Id = exam.Id;
@@ -58,7 +58,7 @@ class DoExam extends React.Component {
   onChangeAnswer = async ({questionId, answer}) => {
     const user = this.state.user;
     user.Exam.Answer[questionId] = answer;
-    AuthenticationService.EditUser(user);
+    AuthService.EditUser(user);
     await this.setState(() => ({
       fetched: false
     }))
@@ -88,7 +88,7 @@ class DoExam extends React.Component {
       }
     }
     user.Exam.Score = score;
-    AuthenticationService.EditUser(user);
+    AuthService.EditUser(user);
   }
 }
 

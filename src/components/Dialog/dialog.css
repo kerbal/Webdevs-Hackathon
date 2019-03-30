@@ -1,0 +1,9 @@
+.dialog__wrapper {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 100%;
+  z-index: 10001;
+}
+.dialog__wrapper .dialog__pannel {
+  
+}

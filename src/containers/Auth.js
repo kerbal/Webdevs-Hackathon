@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthenticationService from '../services/AuthService';
+import { AuthService } from '../services/AuthService';
 // import { AuthService } from '../services/AuthService';
 
 // export function Auth({ children }) {
@@ -19,9 +19,9 @@ export function withAuth(Component) {
     constructor(props) {
       super(props);
       this.state = { 
-        logged: AuthenticationService.logged  
+        logged: AuthService.logged  
       }
-      this.unsubscribe = AuthenticationService.$auth.subscribe(logged => {
+      this.unsubscribe = AuthService.$auth.subscribe(logged => {
         this.setState({ logged });
       });
     }

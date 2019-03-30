@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {  Switch } from "react-router-dom";
 import { Header } from './components/Header';
-import { PrivateRoute } from './containers/CustomRoute';
+import { PrivateRoute, AdminRoute } from './containers/CustomRoute';
 import { Home } from './routes/Home';
 import { LeaderBoardPage } from './routes/LeaderBoard';
 import { History } from './routes/History';
@@ -12,6 +12,7 @@ import EditExam from './components/EditExam/EditExam';
 import EditExamQuestion from './components/EditExam/EditExamQuestion';
 import DoExam from './components/DoExam/DoExam';
 import { Footer } from './components/Footer';
+import { Exams } from './components/EditExam/Exams';
 
 class App extends Component {
   render() {
@@ -23,14 +24,15 @@ class App extends Component {
             <PrivateRoute path="/app" exact component={Home}></PrivateRoute>
             <PrivateRoute path="/app/leaderboard" component={LeaderBoardPage}></PrivateRoute>
             <PrivateRoute path="/app/history" component={History}></PrivateRoute>
-            <PrivateRoute path="/app/admin" exact component={Admin}></PrivateRoute>
-            <PrivateRoute path="/app/admin/questions" exact component={QuestionStorage}></PrivateRoute>
-            <PrivateRoute path="/app/admin/questions/add" exact component={EditQuestion}></PrivateRoute>
-            <PrivateRoute path="/app/admin/questions/edit/:questionId" exact component={EditQuestion}></PrivateRoute>
-            <PrivateRoute path="/app/admin/exams/add" exact component={EditExam}></PrivateRoute>
-            <PrivateRoute path="/app/admin/exams/edit/:examId" exact component={EditExam}></PrivateRoute>
-            <PrivateRoute path="/app/admin/exams/edit/:examId/questions" exact component={EditExamQuestion}></PrivateRoute>
             <PrivateRoute path="/app/exam/:examId" exact component={DoExam}></PrivateRoute>
+            <AdminRoute path="/app/admin" exact component={Admin}></AdminRoute>
+            <AdminRoute path="/app/admin/questions" exact component={QuestionStorage}></AdminRoute>
+            <AdminRoute path="/app/admin/questions/add" exact component={EditQuestion}></AdminRoute>
+            <AdminRoute path="/app/admin/questions/edit/:questionId" exact component={EditQuestion}></AdminRoute>
+            <AdminRoute path="/app/admin/exams" exact component={Exams}></AdminRoute>
+            <AdminRoute path="/app/admin/exams/add" exact component={EditExam}></AdminRoute>
+            <AdminRoute path="/app/admin/exams/edit/:examId" exact component={EditExam}></AdminRoute>
+            <AdminRoute path="/app/admin/exams/edit/:examId/questions" exact component={EditExamQuestion}></AdminRoute>
           </Switch>
         </div>
         <Footer style={{ marginTop: '3rem' }}></Footer>

@@ -4,6 +4,7 @@ import { Card } from '../Cards';
 import RadioButton from '../RadioButton';
 import { history } from '../..';
 import { Title } from '../Title';
+import { Button } from '../Buttons';
 
 class EditQuestion extends React.Component {
   constructor (props) {
@@ -20,20 +21,23 @@ class EditQuestion extends React.Component {
     const AnswerJSX = [];
     for(const answer in Answer) {
       AnswerJSX.push(
-        <div className="d-flex m-1">
-          <RadioButton 
-            index={answer} 
-            value={answer} 
-            label={answer} 
-            name={answer} 
-            onClick={this.onActualAnswerChange}
-            checked={ActualAnswer === answer}
-          />
+        <div className="form-group w-100">
+          <label>
+            <RadioButton 
+              index={answer} 
+              value={answer} 
+              label={"Đáp án "+answer} 
+              name={answer} 
+              onClick={this.onActualAnswerChange}
+              checked={ActualAnswer === answer}
+            />
+          </label>
           <textarea 
             value={this.state.question.Answer[answer]}
-            className="form-control ml-3"
+            className="form-control mt-3"
             name={`Answer-${answer}`}
             onChange={this.onInfoChange}
+            placeholder={`Nhập đáp án ${answer}...`}
           />
         </div>
       )
@@ -42,23 +46,22 @@ class EditQuestion extends React.Component {
     return (
       <div className="container">
         <Card>
-          <Title>
-            Thêm câu hỏi
-          </Title>
+          <Title className="text-center">Thêm câu hỏi</Title>
           <div className="mt-4">
             <div className="form-group">
-              <label>Câu hỏi</label>
+              <label className="font-weight-bold">Câu hỏi</label>
               <textarea className="form-control"
                 value={Question}
                 name="Question"
                 onChange={this.onInfoChange}
+                placeholder="Nhập câu câu hỏi..."
               />
             </div>
             {AnswerJSX}
           </div>
-          <button className="btn-blue border-0" onClick={this.onSaveQuestion}>
-            Save
-          </button>
+          <Button className="w-100 bg-success mt-3" onClick={this.onSaveQuestion}>
+            <i className="fa fa-plus mr-2"></i>Thêm câu hỏi
+          </Button>
         </Card>
       </div>
     )

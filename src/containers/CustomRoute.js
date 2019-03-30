@@ -1,7 +1,7 @@
 import React from 'react';
 // import { AuthService } from '../services/AuthService';
 import { Route, Redirect } from 'react-router-dom';
-import AuthenticationService from '../services/AuthService';
+import { AuthService } from '../services/AuthService';
 
 function buildCustomRoute(getState, redirectPath) {
   return function ({ component: Component, ...rest }) {
@@ -28,12 +28,12 @@ function buildCustomRoute(getState, redirectPath) {
   };
 }
 
-export const AuthRoute = buildCustomRoute(() => !AuthenticationService.logged(), '/app');
-export const PrivateRoute = buildCustomRoute(() => AuthenticationService.logged(), '/');
-export const AdminRoute = buildCustomRoute(() => AuthenticationService.logged() && AuthenticationService.user.Name === 'admin', 
+export const AuthRoute = buildCustomRoute(() => !AuthService.logged(), '/app');
+export const PrivateRoute = buildCustomRoute(() => AuthService.logged(), '/');
+export const AdminRoute = buildCustomRoute(() => AuthService.logged() && AuthService.user.IsAdmin, 
   () => {
-    if(AuthenticationService.logged()) {
-      if(!AuthenticationService.user.Username) {
+    if(AuthService.logged()) {
+      if(!AuthService.user.IsAdmin) {
         return '/app';
       }
     }

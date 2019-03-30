@@ -1,36 +1,28 @@
 import { Subject } from "../utils/Observable";
 import { history } from '..';
-import { LocalStorageService } from "./LocalStorageService";
+import { UserService } from "./UserService";
 
-class AuthService {
+class _AuthService {
   constructor () {
     this.$auth = new Subject();
-    this.user = sessionStorage.getItem('wdh_js_user');
-    this.Users = LocalStorageService.ReadData('users');
-    if(this.Users === null) {
-      this.GenUsers();
+    let userJson = sessionStorage.getItem('wdh_js_user');
+    if (!!userJson) {
+      this.user = JSON.parse(userJson);
     }
   }
 
-  register = (user) => {
-    this.Users.push(user);
-    LocalStorageService.WriteData('users', this.Users);
-  }
-
-  login = ({Username, Password}) => {
-    const user = this.Users.find(user => user.Username === Username);
-    if(!user) {
-      return 'Tên đăng nhập sai!';
-    }
-    else {
-      if(Password !== user.Password) {
-        return 'Sai mật khẩu';
+  login = (Username, Password) => {
+    const user = UserService.FetchUser(Username, Password);
+    if (!!user) {
+      this.user = user;
+      sessionStorage.setItem('wdh_js_user', JSON.stringify(user));
+      this.$auth.broadcast(AuthService.logged);
+      if (user.IsAdmin) {
+        history.push('/app/admin');
+      } else {
+        history.push('/app');
       }
     }
-    this.user = Username;
-    sessionStorage.setItem('wdh_js_user', Username);
-    this.$auth.broadcast(AuthService.logged);
-    history.push('/app');
   }
 
   logout() {
@@ -40,58 +32,9 @@ class AuthService {
     history.push('/');
   }
 
-  // static login() {
-  //   console.log('login');
-  //   AuthService.user = "admin";
-  //   sessionStorage.setItem('wdh_js_user', 'admin');
-  //   AuthService.$auth.broadcast(AuthService.logged);
-  //   history.push('/app');
-  // }
-
   logged() {
     return !!this.user;
   }
-
-  GetUser (username) {
-    return this.Users.find(user => user.Username === username);
-  }
-
-  EditUser (user) {
-    this.Users = this.Users.map(us => {
-      if(us.Username === user.Username) {
-        return user;
-      }
-      else {
-        return us;
-      }
-    });
-    LocalStorageService.WriteData('users', this.Users);
-  }
-
-  DefaultUserForm (Username, Name, Password) {
-    return ({
-      Username,
-      Name,
-      Password,
-      Exam: {
-        ExamId: '',
-        Answer: {},
-        StartTime: 0,
-        EndTime: 0,
-        Score: 0
-      }
-    });
-  }
-
-  GenUsers () {
-    this.Users = [];
-    this.Users.push(this.DefaultUserForm('admin', 'Admin', '123'));
-    for(let i = 0; i < 50; i++) {
-      this.Users.push(this.DefaultUserForm(`user_${i}`, `Thí sinh ${i}`, '123'));
-    }
-    LocalStorageService.WriteData('users', this.Users);
-  }
 }
 
-const AuthenticationService = new AuthService();
-export default AuthenticationService;
+export const AuthService = new _AuthService();

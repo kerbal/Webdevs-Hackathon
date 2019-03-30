@@ -5,6 +5,7 @@ import { ExamStore } from '../../services/ExamService';
 import { QuestionStore } from '../../services/QuestionService';
 import QuestionBrowser from '../EditExam/QuestionBrowser';
 import { Button } from '../Buttons';
+import { history } from '../..';
 
 class DoExam extends React.Component {
   constructor (props) {
@@ -46,12 +47,30 @@ class DoExam extends React.Component {
     const user = AuthenticationService.GetUser(AuthenticationService.user);
     const exam = ExamStore.GetExam(this.props.match.params.examId);
     if(exam && user.Exam.ExamId === '') {
-      user.Exam.Id = exam.Id;
+      user.Exam = {
+        ExamId: exam.Id,
+        Answer: {},
+        StartTime: new Date().getTime(),
+        EndTime: 0,
+        Score: -1
+      };
+      exam.UserCount++;
+      ExamStore.EditExam(exam);
       await this.setState(() => ({
         user,
         exam,
         fetched: true
       }));
+    }
+    else if(user.Exam.Score === -1 ) {
+      await this.setState(() => ({
+        user,
+        exam,
+        fetched: true
+      }));
+    }
+    else {
+      history.replace('/app/history');
     }
   }
 
@@ -88,7 +107,9 @@ class DoExam extends React.Component {
       }
     }
     user.Exam.Score = score;
+    user.Exam.EndTime = new Date().getTime();
     AuthenticationService.EditUser(user);
+    history.push('/app/history');
   }
 }
 

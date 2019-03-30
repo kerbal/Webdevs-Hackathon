@@ -78,7 +78,7 @@ class AuthService {
         Answer: {},
         StartTime: 0,
         EndTime: 0,
-        Score: 0
+        Score: -1
       }
     });
   }

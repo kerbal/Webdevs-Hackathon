@@ -43,7 +43,9 @@ class EditQuestion extends React.Component {
       <div className="container">
         <Card>
           <Title>
-            Thêm câu hỏi
+            {
+              this.state.mode === 'add' ? 'Thêm câu hỏi' : 'Sửa câu hỏi'
+            }
           </Title>
           <div className="mt-4">
             <div className="form-group">
@@ -112,6 +114,7 @@ class EditQuestion extends React.Component {
     else {
       QuestionStore.EditQuestion(this.state.question);
     }
+    console.log(document.referrer);
     history.push('/app/admin/questions');
   }
 }

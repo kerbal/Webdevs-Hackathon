@@ -3,7 +3,7 @@ import {  Switch } from "react-router-dom";
 import { Header } from './components/Header';
 import { PrivateRoute } from './containers/CustomRoute';
 import { Home } from './routes/Home';
-import { LeaderBoard } from './routes/LeaderBoard';
+import { LeaderBoardPage } from './routes/LeaderBoard';
 import { History } from './routes/History';
 import Admin from './components/Admin';
 import QuestionStorage from './components/QuestionStorage/QuestionStorage';
@@ -11,6 +11,7 @@ import EditQuestion from './components/EditQuestion';
 import EditExam from './components/EditExam/EditExam';
 import EditExamQuestion from './components/EditExam/EditExamQuestion';
 import DoExam from './components/DoExam/DoExam';
+import { Footer } from './components/Footer';
 
 class App extends Component {
   render() {
@@ -20,7 +21,7 @@ class App extends Component {
         <div style={{paddingTop: "70px"}} className="bg-grey">
           <Switch>
             <PrivateRoute path="/app" exact component={Home}></PrivateRoute>
-            <PrivateRoute path="/app/leaderboard" component={LeaderBoard}></PrivateRoute>
+            <PrivateRoute path="/app/leaderboard" component={LeaderBoardPage}></PrivateRoute>
             <PrivateRoute path="/app/history" component={History}></PrivateRoute>
             <PrivateRoute path="/app/admin" exact component={Admin}></PrivateRoute>
             <PrivateRoute path="/app/admin/questions" exact component={QuestionStorage}></PrivateRoute>
@@ -32,6 +33,7 @@ class App extends Component {
             <PrivateRoute path="/app/exam/:examId" exact component={DoExam}></PrivateRoute>
           </Switch>
         </div>
+        <Footer style={{ marginTop: '3rem' }}></Footer>
       </div>
     );
   }

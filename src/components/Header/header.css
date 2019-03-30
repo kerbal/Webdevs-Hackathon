@@ -7,8 +7,10 @@
   line-height: 56px;
   display: inline-block;
 }
-.header .navlink.active, .header .navlink:hover {
-  border-bottom: 4px solid var(--cn-red);
+.header .navlink.active, 
+.header .navlink:hover,
+.navbar-collapse .nav-link.active {
+  border-bottom: 4px solid var(--main-color);
 }
 .hover-menu{
   position: relative;

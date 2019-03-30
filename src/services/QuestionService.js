@@ -38,7 +38,7 @@ export class QuestionService {
     this.$subject.broadcast(this.Questions);
   }
 
-  DefaultQuestionForm (Question = '', Answer = {A: '',B: '',C: '',D: ''}, ActualAnswer = 'A') {
+  DefaultQuestionForm (Question = '', Answer = {A: 'Đáp án A',B: 'Đáp án B',C: 'Đáp án C',D: 'Đáp án D'}, ActualAnswer = 'A') {
     return ({
       Id: uuid(), 
       Question,

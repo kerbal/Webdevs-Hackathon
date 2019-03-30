@@ -31,10 +31,13 @@ class Question extends React.Component {
     }
 
     return (
-      <div className="question-view">
-        <div className="question-question">
+      <div className="d-flex" style={{ flexDirection: 'column' }}>
+        <div style={{ flexBasis: '' }}>
+        <h1 className="text-main">
           {Question}
+        </h1>
         </div>
+        
         <div>
           {AnswerJSX}
         </div>

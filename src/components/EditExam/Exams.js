@@ -10,7 +10,7 @@ export class Exams extends React.Component {
     return (
       <div className="container">
         <div className="row my-4">
-          <div class="col-12">
+          <div className="col-12">
             <Title className="text-center">Kho đề thi</Title>
           </div>
         </div>
@@ -23,7 +23,7 @@ export class Exams extends React.Component {
             </Link>
           </div>
           <div className="col-12">
-            <Search></Search>
+            <Search placeholder="Tìm kiếm..."></Search>
           </div>
         </div>
         <div className="row">

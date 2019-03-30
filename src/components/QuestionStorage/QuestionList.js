@@ -17,7 +17,7 @@ class QuestionList extends React.Component {
     const { questions } = this.state;
     return (
       <div className="row">
-        <div class="col-12">
+        <div className="col-12">
           {questions
           .slice(0, 10)
           .map(question => (
@@ -29,7 +29,7 @@ class QuestionList extends React.Component {
             </div>
           ))}
         </div>
-        <div class="col-12 d-flex justify-content-center mt-5">
+        <div className="col-12 d-flex justify-content-center mt-5">
           <Pagination total={questions.length} pageSize={10} current={1}></Pagination>
         </div>
       </div>

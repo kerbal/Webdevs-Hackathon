@@ -39,12 +39,6 @@ export function Header() {
                   <span className="nav-link d-block d-md-none text-center bg-dark-grey">
                     {AuthService.user.Username}
                   </span>
-                  { 
-                    AuthService.user.IsAdmin &&
-                    <NavLink className="text-dark nav-link" to="/app/admin">
-                      <i className="fa fa-cog mr-3 text-main"></i>Quản lý
-                    </NavLink>
-                  }
                   <NavLink className="nav-link text-dark" to="/app/account">
                     <i className="fa fa-user text-main mr-3"></i>Tài khoản
                   </NavLink>

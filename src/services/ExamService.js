@@ -2,29 +2,13 @@ import { LocalStorageService } from "./LocalStorageService";
 import uuid from 'uuid';
 import { Subject } from "../utils/Observable";
 
-const exams = [
-  {
-    Id: uuid(),
-    Name: 'Đề A',
-    Description: 'Bộ đề Toán, Lý, Hóa',
-    QuestionList: [],
-  },
-  {
-    Id: uuid(),
-    Name: 'Đề B',
-    Description: 'Bộ đề Văn, Sử, Địa',
-    QuestionList: [],
-  }
-];
-
 class ExamService {
   $subject = new Subject();
   
   constructor () {
     this.Exams = LocalStorageService.ReadData('exams');
     if(this.Exams === null) {
-      this.Exams = exams;
-      LocalStorageService.WriteData('exams', this.Exams);
+      this.GenExam();
     }
   }
 
@@ -54,12 +38,21 @@ class ExamService {
     this.$subject.broadcast(this.Exams);
   }
 
-  DefaultExamForm () {
+  DefaultExamForm (Name = '', Description = '') {
     return ({
       Id: uuid(),
-      Name: '',
+      Name,
+      Description,
       QuestionList: [],
+      UserCount: 0
     });
+  }
+
+  GenExam () {
+    this.Exams = [];
+    this.Exams.push(this.DefaultExamForm('Đề A', 'Bộ đề Toán, Lý, Hóa'));
+    this.Exams.push(this.DefaultExamForm('Đề B', 'Bộ đề Văn, Sử, Địa'));
+    LocalStorageService.WriteData('exams', this.Exams);
   }
 }
 

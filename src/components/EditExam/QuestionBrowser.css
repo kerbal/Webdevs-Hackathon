@@ -1,0 +1,10 @@
+.quest-pg {
+
+}
+.quest-pg .quest-pg__cell {
+  width: calc(10% - 10px);
+  margin-right: 10px;
+}
+.quest-pg .quest-pg__cell:last-child {
+  margin-right: 0;
+}

@@ -7,7 +7,7 @@ class RadioButton extends React.Component {
 
   render () {
     return (
-      <div className="custom-control custom-radio">
+      <div className="custom-control custom-radio mt-2">
         <input 
           type="radio" 
           className="custom-control-input" 
@@ -17,7 +17,7 @@ class RadioButton extends React.Component {
           id={this.props.index}
           onClick={this.props.onClick}
         />
-        <label className="custom-control-label" htmlFor={this.props.index}>{this.props.label}</label>
+        <h4 className="custom-control-label" htmlFor={this.props.index}>{this.props.label}</h4>
       </div>
     )
   }

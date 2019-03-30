@@ -4,7 +4,6 @@ import { Header } from './components/Header';
 import { PrivateRoute, AdminRoute } from './containers/CustomRoute';
 import { Home } from './routes/Home';
 import { LeaderBoardPage } from './routes/LeaderBoard';
-import { History } from './routes/History';
 import Admin from './components/Admin';
 import QuestionStorage from './components/QuestionStorage/QuestionStorage';
 import EditQuestion from './components/EditQuestion';
@@ -13,6 +12,7 @@ import EditExamQuestion from './components/EditExam/EditExamQuestion';
 import DoExam from './components/DoExam/DoExam';
 import { Footer } from './components/Footer';
 import { Exams } from './components/EditExam/Exams';
+import History from './components/History/History';
 
 class App extends Component {
   render() {

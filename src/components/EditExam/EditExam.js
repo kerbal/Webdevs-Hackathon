@@ -26,7 +26,11 @@ class EditExam extends React.Component {
     return (
       <div className="container my-4">
         <Card>
-          <Title>Thêm đề thi</Title>
+          <Title>
+            {
+              this.state.mode === 'add' ? 'Thêm đề thi' : 'Sửa đề thi'
+            }
+          </Title>
           <div className="mt-4">
             <div className="form-group">
               <label>Tên đề thi</label>

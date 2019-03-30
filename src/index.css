@@ -9,7 +9,7 @@ body, html {
 :root{
   --main-color: #CB356B;
 }
-
+.fixed {position: fixed;}
 .bg-grey {background-color:#f3f7f7}
 .bg-dark-grey { background-color:#e9ecef; }
 .text-cn-yellow {color:#fffdf4!important}

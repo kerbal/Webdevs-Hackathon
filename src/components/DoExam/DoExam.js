@@ -5,6 +5,10 @@ import { ExamStore } from '../../services/ExamService';
 import { QuestionStore } from '../../services/QuestionService';
 import QuestionBrowser from '../EditExam/QuestionBrowser';
 import { Button } from '../Buttons';
+import { history } from '../..';
+import { UserService } from '../../services/UserService';
+import { Card } from '../Cards';
+import { Title } from '../Title';
 
 class DoExam extends React.Component {
   constructor (props) {
@@ -25,40 +29,64 @@ class DoExam extends React.Component {
     const { exam, questionIndex, user } = this.state;
     const question = QuestionStore.GetQuestion(exam.QuestionList[questionIndex]);
     return (
-      <div>
+      <div className="container">
+        <Title className="text-center my-4">{exam.Name}</Title>
+        <Card>
         <Question 
           question={question}
           choice={user.Exam.Answer[question.Id]}
           changeAnswer={this.onChangeAnswer}
         />
+        </Card>
+        
+        
         <QuestionBrowser
+          current={questionIndex}
           questions={exam.QuestionList}
           onChangeQuestion={this.onChangeQuestion}
         />
-        <Button onClick={this.onSubmit}>
-          Finish
+        <Button className="w-100 mt-4 font-weight-bold" onClick={this.onSubmit}>
+          <i className="fa fa-check-circle mr-2"></i>Nộp bài
         </Button>
       </div>
     )
   }
   
   async componentWillMount () {
-    const user = AuthService.GetUser(AuthService.user);
+    const user = UserService.FetchUser(AuthService.user.Username);
     const exam = ExamStore.GetExam(this.props.match.params.examId);
     if(exam && user.Exam.ExamId === '') {
-      user.Exam.Id = exam.Id;
+      user.Exam = {
+        ExamId: exam.Id,
+        Answer: {},
+        StartTime: new Date().getTime(),
+        EndTime: 0,
+        Score: -1
+      };
+      exam.UserCount++;
+      ExamStore.EditExam(exam);
       await this.setState(() => ({
         user,
         exam,
         fetched: true
       }));
     }
+    else if(user.Exam.Score === -1 ) {
+      await this.setState(() => ({
+        user,
+        exam,
+        fetched: true
+      }));
+    }
+    else {
+      history.replace('/app/history');
+    }
   }
 
   onChangeAnswer = async ({questionId, answer}) => {
     const user = this.state.user;
     user.Exam.Answer[questionId] = answer;
-    AuthService.EditUser(user);
+    UserService.EditUser(user);
     await this.setState(() => ({
       fetched: false
     }))
@@ -88,7 +116,9 @@ class DoExam extends React.Component {
       }
     }
     user.Exam.Score = score;
-    AuthService.EditUser(user);
+    user.Exam.EndTime = new Date().getTime();
+    UserService.EditUser(user);
+    history.push('/app/history');
   }
 }
 

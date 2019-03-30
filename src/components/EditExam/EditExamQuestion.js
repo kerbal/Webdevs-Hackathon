@@ -4,7 +4,9 @@ import { ExamStore } from '../../services/ExamService';
 import QuestionView from './QuestionView';
 import { QuestionStore } from '../../services/QuestionService';
 import QuestionBrowser from './QuestionBrowser';
-
+import { Button } from '../Buttons';
+import { NavLink } from 'react-router-dom';
+import { Title } from '../Title';
 class EditExamQuestion extends React.Component {
   constructor (props) {
     super(props);
@@ -21,8 +23,18 @@ class EditExamQuestion extends React.Component {
     }
 
     return (
+      <div className="container my-4">
+      <div class="row">
+        <div class="col-12"><Title className="text-center mb-4" size="3">{this.state.exam.Name}</Title></div>
+      </div>
       <div className="row">
         <div className="col-4">
+        
+          <NavLink to='/app/admin/questions/add'>
+            <Button className="w-100 mb-4">
+              <i className="fa fa-plus mr-2"></i>Thêm câu hỏi mới
+            </Button>
+          </NavLink>
           <QuestionListPanel onAddQuestion={this.onAddQuestion}/>
         </div>
         <div className="col-8">
@@ -30,12 +42,15 @@ class EditExamQuestion extends React.Component {
             question={QuestionStore.GetQuestion(this.state.exam.QuestionList[this.state.questionIndex])} 
             removeQuestion={this.removeQuestion}
           />
-          <QuestionBrowser 
+          <QuestionBrowser
+            current={this.state.questionIndex}
             questions={this.state.exam.QuestionList}
             onChangeQuestion={this.onPageChange}  
           />
         </div>
       </div>
+      </div>
+      
     )
   }
 
@@ -66,7 +81,6 @@ class EditExamQuestion extends React.Component {
   }
 
   removeQuestion = (id) => {
-    console.log(id);
     const exam = this.state.exam;
     exam.QuestionList = exam.QuestionList.filter(qsId => qsId !== id);
     this.setState(() => ({

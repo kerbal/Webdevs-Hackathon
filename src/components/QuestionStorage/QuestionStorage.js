@@ -23,7 +23,7 @@ class QuestionStorage extends React.Component {
             </Link>
           </div>
           <div className="col-12">
-            <Search></Search>
+            <Search placeholder="Tìm kiếm..."></Search>
           </div>
         </div>
         <QuestionList/>

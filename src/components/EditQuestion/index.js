@@ -42,11 +42,13 @@ class EditQuestion extends React.Component {
         </div>
       )
     }
-
+    let title = this.state.mode === 'add' ? 'Thêm câu hỏi' : 'Sửa câu hỏi'
     return (
-      <div className="container">
+      <div className="container my-5">
         <Card>
-          <Title className="text-center">Thêm câu hỏi</Title>
+          <Title className="text-center">
+            {title}
+          </Title>
           <div className="mt-4">
             <div className="form-group">
               <label className="font-weight-bold">Câu hỏi</label>
@@ -60,7 +62,7 @@ class EditQuestion extends React.Component {
             {AnswerJSX}
           </div>
           <Button className="w-100 bg-success mt-3" onClick={this.onSaveQuestion}>
-            <i className="fa fa-plus mr-2"></i>Thêm câu hỏi
+            <i className="fa fa-save mr-2"></i> Lưu lại
           </Button>
         </Card>
       </div>
@@ -115,6 +117,7 @@ class EditQuestion extends React.Component {
     else {
       QuestionStore.EditQuestion(this.state.question);
     }
+    console.log(document.referrer);
     history.push('/app/admin/questions');
   }
 }

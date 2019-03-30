@@ -10,7 +10,6 @@ class QuestionBrowser extends React.Component {
   }
 
   render () {
-    console.log(this.props.current);
     return (
       <Card className="quest-pg mt-4">
       <div>

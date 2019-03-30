@@ -77,14 +77,14 @@ class EditExam extends React.Component {
     if(this.props.match.path.includes('add')) {
       await this.setState(() => ({
         mode: 'add',
-        exam: ExamStore.DefaultExamForm()
+        exam: JSON.parse(JSON.stringify(ExamStore.DefaultExamForm()))
       }));
     }
     else {
       const examId = this.props.match.params.examId;
       await this.setState(() => ({
         mode: 'edit',
-        exam: ExamStore.GetExam(examId)
+        exam: JSON.parse(JSON.stringify(ExamStore.GetExam(examId)))
       }));
     }
     await this.setState(() => ({
@@ -115,11 +115,12 @@ class EditExam extends React.Component {
     else {
       ExamStore.EditExam(this.state.exam);
     }
-    history.push('/app/admin');
+    history.push(`/app/admin/exams`);
   }
 
   onRemoveExam = () => {
-
+    ExamStore.RemoveExam(this.state.exam.Id);
+    history.push('/app/admin/exams');
   }
 }
 

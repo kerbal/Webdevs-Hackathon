@@ -13,7 +13,7 @@ class History extends React.Component {
   render () {
     const user = UserService.FetchUser(AuthService.user.Username);
     return (
-      <div className="container my-5">
+      <div className="container mb-5 mt-4">
         <Title>
           Kết quả làm bài
         </Title>

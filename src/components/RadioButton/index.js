@@ -17,7 +17,7 @@ class RadioButton extends React.Component {
           id={this.props.index}
           onClick={this.props.onClick}
         />
-        <h4 className="custom-control-label" htmlFor={this.props.index}>{this.props.label}</h4>
+        <label className="custom-control-label" htmlFor={this.props.index}>{this.props.label}</label>
       </div>
     )
   }

@@ -13,7 +13,7 @@ export function LeaderBoardPage() {
           
           {UserService.Users
           .filter(user => !user.IsAdmin)
-          .sort((a, b) => a.Exam.Score > b.Exam.Score)
+          .sort((a, b) => b.Exam.Score - a.Exam.Score)
           .slice(0, 30)
           .map((user, idx) => (
             <div className="col-md-4">

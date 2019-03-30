@@ -33,11 +33,10 @@ class Question extends React.Component {
     return (
       <div className="d-flex" style={{ flexDirection: 'column' }}>
         <div style={{ flexBasis: '' }}>
-        <h1 className="text-main">
+        <h2 className="text-main">
           {Question}
-        </h1>
+        </h2>
         </div>
-        
         <div>
           {AnswerJSX}
         </div>

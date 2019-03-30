@@ -72,14 +72,14 @@ class EditQuestion extends React.Component {
   async componentWillMount () {
     if(this.props.match.path.includes('add')) {
       await this.setState(() => ({
-        question: QuestionStore.DefaultQuestionForm(),
+        question: JSON.parse(JSON.stringify(QuestionStore.DefaultQuestionForm())),
         mode: 'add'
       }));
     }
     else {
       const questionId = this.props.match.params.questionId;
       await this.setState(() => ({
-        question: QuestionStore.GetQuestion(questionId),
+        question: JSON.parse(JSON.stringify(QuestionStore.GetQuestion(questionId))),
         mode: 'edit'
       }));
     }

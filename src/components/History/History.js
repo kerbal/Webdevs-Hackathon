@@ -11,7 +11,7 @@ class History extends React.Component {
   }
 
   render () {
-    const user = UserService.FetchUser(AuthService.user.Username);
+    const user = UserService.FetchUser(AuthService.user.Username, AuthService.user.Password);
     return (
       <div className="container mb-5 mt-4">
         <Title className="text-center">

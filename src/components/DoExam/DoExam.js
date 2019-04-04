@@ -53,7 +53,7 @@ class DoExam extends React.Component {
   }
   
   async componentWillMount () {
-    const user = UserService.FetchUser(AuthService.user.Username);
+    const user = UserService.FetchUser(AuthService.user.Username, AuthService.user.Password);
     const exam = ExamStore.GetExam(this.props.match.params.examId);
     if(exam && user.Exam.ExamId === '') {
       user.Exam = {

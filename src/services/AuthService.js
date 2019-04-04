@@ -23,6 +23,7 @@ class _AuthService {
         history.push('/app');
       }
     }
+    return false;
   }
 
   logout() {

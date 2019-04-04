@@ -32,7 +32,9 @@
 .form-control.hover:hover {
   background-color: #f9f9f9;
 }
-
+.bd-main {
+  border: 2px solid var(--main-color);
+}
 
 .lp {
   position: absolute;

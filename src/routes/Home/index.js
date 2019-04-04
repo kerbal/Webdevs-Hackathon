@@ -9,7 +9,8 @@ import { NavLink } from 'react-router-dom';
 import { UserService } from '../../services/UserService';
 
 export function Home() {
-  const user = UserService.FetchUser(AuthService.user.Username);
+  const user = UserService.FetchUser(AuthService.user.Username, AuthService.user.Password);
+  console.log(user);
   if(user.Exam.ExamId === '' || user.Exam.Score === -1) {
     return (
       <div className="container">

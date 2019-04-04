@@ -19,7 +19,7 @@ class _UserService {
   
 
   FetchUser (username, password) {
-    return this.Users.find(user => user.Username === username);
+    return this.Users.find(user => user.Username === username && user.Password === password);
   }
 
   EditUser (user) {

@@ -10,7 +10,7 @@ class ExamList extends React.Component {
   }
 
   render () {
-    const user = UserService.FetchUser(AuthService.user.Username);
+    const user = UserService.FetchUser(AuthService.user.Username, AuthService.user.Password);
     if(user.Exam.ExamId === '' || !this.props.userView) {
       return (
         ExamStore.Exams.map(exam => (

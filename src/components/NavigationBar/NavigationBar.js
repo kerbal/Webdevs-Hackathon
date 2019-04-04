@@ -20,7 +20,7 @@ class NavigationBar extends React.Component {
     let path = this.props.pathname.split('/');
     path.shift();
     return (
-      <div className="navigation-bar">
+      <div className="navigation-bar mt-3 font-weight-bold">
         <div className="container">
         {
           path.map((subPath, index) => (

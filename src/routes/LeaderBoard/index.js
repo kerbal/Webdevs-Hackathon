@@ -18,7 +18,7 @@ export function LeaderBoardPage() {
           .map((user, idx) => (
             <div className="col-md-4">
               <LeaderBoard.Cell key={user.Username} icon={idx < 10}>
-                <span>{user.Name}</span>
+                <span>{idx + 1}. {user.Name}</span>
                 <span className="float-right">{user.Exam.Score}</span>
               </LeaderBoard.Cell>
             </div>

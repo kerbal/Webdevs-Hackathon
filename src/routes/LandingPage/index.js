@@ -16,6 +16,8 @@ import { Dialog } from '../../components/Dialog';
 import { LeaderBoardPage } from '../LeaderBoard';
 import { UserService } from '../../services/UserService';
 
+import crown from '../../images/leaderboard/crown.svg';
+
 function scrollTo(query) {
   scrollToElement(query, {
     offset: -100,
@@ -32,8 +34,9 @@ export class LandingPage extends React.Component {
       mobileMenu: false,
       navbarSticky: false,
       detailLB: false,
+      alert: null,
     }
-    this.setIsLogin = isLogin => this.setState({ isLogin });
+    this.setIsLogin = isLogin => this.setState({ isLogin, alert: null });
     this.setDetailLB = detailLB => this.setState({ detailLB });
     this.navbarText = () => cx({"text-white": !this.state.navbarSticky}, {'text-main': this.state.navbarSticky});
     this.navbar = createRef();
@@ -68,7 +71,8 @@ export class LandingPage extends React.Component {
   setInput = (field) => {
     return e => {
       this.setState({
-        [field]: e.target.value
+        [field]: e.target.value,
+        ["err_"+field]: false,
       });
     }
   }
@@ -77,18 +81,31 @@ export class LandingPage extends React.Component {
     e.preventDefault();
     if (this.state.isLogin) {
       this.Auth();
+    } else {
+      this.setState({
+        alert: { success: false, message: 'Chức năng ghi danh hiện tại chưa dùng được.' }
+      })
     }
   }
 
   Auth = () => {
     let { Username, Password } = this.state;
-    if (!Username || !Password) {
-      AuthService.login(Username, Password);
+    if (Username && Password) {
+      if (!AuthService.login(Username, Password)){
+        this.setState({
+          alert: { success: false, message: 'Tên tài khoản hoặc mật khẩu không đúng.' }
+        });
+      } 
+    } else {
+      let error = {};
+      error["err_Username"] = !Username;
+      error["err_Password"] = !Password;
+      this.setState(error);
     }
   }
 
   render() {
-    const { detailLB, mobileMenu, isLogin, navbarSticky } = this.state;
+    const { alert, detailLB, mobileMenu, isLogin, navbarSticky } = this.state;
     return (
       <div className="lp">
         {detailLB && 
@@ -140,18 +157,26 @@ export class LandingPage extends React.Component {
                       <a className={cx("nav-link", {active: isLogin })} href="#" onClick={_ => this.setIsLogin(true)}>Đăng nhập</a>
                     </li>
                   </ul>
+                  {alert && 
+                  <div className={cx("alert my-3", {"alert-danger": !alert.success, "alert-success": alert.success})}>
+                    {alert.message}
+                  </div>}
                   <div className="form-group mb-4">
                     <label htmlFor="">Tên tài khoản</label>
-                    <input className="form-control px-3 bdr-max" type="text" placeholder="Tên tài khoản" onChange={this.setInput('Username')} />
+                    <input className={cx("form-control px-3 bdr-max", {"bd-main": this.state["err_Username"]})} 
+                      type="text" placeholder="Tên tài khoản" onChange={this.setInput('Username')}/>
+                    {this.state["err_Username"] && <span className="text-main mt-3">Tên tài khoản là bắt buộc</span>}
                   </div>
                   <div className="form-group mb-4">
                     <label htmlFor="">Mật khẩu</label>
-                    <input className="form-control px-3 bdr-max" type="text" placeholder="Mật khẩu" onChange={this.setInput('Password')} />
+                    <input className={cx("form-control px-3 bdr-max", {"bd-main": this.state["err_Password"]})} 
+                      type="password" placeholder="Mật khẩu" onChange={this.setInput('Password')} />
+                    {this.state["err_Password"] && <span className="text-main mt-3">Tên tài khoản là bắt buộc</span>}
                   </div>
                   {!isLogin &&
                   <div className="form-group mb-4">
                     <label htmlFor="">Xác nhận mật khẩu</label>
-                    <input className="form-control px-3 bdr-max" type="text" placeholder="Nhập lại mật khẩu" />
+                    <input className="form-control px-3 bdr-max" type="password" placeholder="Nhập lại mật khẩu" />
                   </div>}
                   <div className="form-group">
                     <Button type="submit" className="w-100">
@@ -168,11 +193,12 @@ export class LandingPage extends React.Component {
                 <Title className="text-center my-4" size="3">Bảng vàng thành tích</Title>
                 {UserService.Users
                 .filter(user => !user.IsAdmin)
-                .sort((a, b) => a.Exam.Score > b.Exam.Score)
+                .sort((a, b) => b.Exam.Score - a.Exam.Score)
                 .slice(0, 10)
-                .map((user) => (
+                .map((user, idx) => (
                   <h4 key={user.Username} className="my-3 form-control px-3 bdr-max hover">
-                    <span>{user.Name}</span>
+                    <img className="icon mr-2" src={crown} width="20" style={{marginTop:'-5px'}}/>
+                    <span>{idx + 1}. {user.Name}</span>
                     <span className="float-right">{user.Exam.Score}</span>
                   </h4>
                 ))}

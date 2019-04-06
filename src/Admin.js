@@ -9,6 +9,7 @@ import EditExam from './components/EditExam/EditExam';
 import EditExamQuestion from './components/EditExam/EditExamQuestion';
 import { Footer } from './components/Footer';
 import { Exams } from './components/EditExam/Exams';
+import NavigationBar from './components/NavigationBar/NavigationBar';
 
 class App extends Component {
   render() {
@@ -16,6 +17,10 @@ class App extends Component {
       <div>
         <Header></Header>
         <div style={{paddingTop: "70px", minHeight: '80vh'}} className="bg-grey">
+        <NavigationBar
+          pathname={this.props.location.pathname}
+          except={['add', 'edit']}  
+        />
           <Switch>
             <AdminRoute path="/admin" exact component={Admin}></AdminRoute>
             <AdminRoute path="/admin/questions" exact component={QuestionStorage}></AdminRoute>

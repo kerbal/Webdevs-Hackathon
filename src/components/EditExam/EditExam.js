@@ -5,6 +5,7 @@ import { history } from '../..';
 import { Link } from 'react-router-dom';
 import { Title } from '../Title';
 import { Button } from '../Buttons';
+import cx from 'classnames';
 
 class EditExam extends React.Component {
   constructor (props) {
@@ -12,7 +13,8 @@ class EditExam extends React.Component {
     this.state = {
       mode: undefined,
       exam: undefined,
-      fetched: false
+      fetched: false,
+      alert: undefined
     }
   }
 
@@ -22,7 +24,8 @@ class EditExam extends React.Component {
     }
 
     const { Name, Description } = this.state.exam;
-
+    const alert = this.state.alert;
+    
     return (
       <div className="container my-4">
         <Card>
@@ -52,6 +55,14 @@ class EditExam extends React.Component {
               />
             </div>
           </div>
+          {
+            alert && 
+            <div className={cx("alert my-3", {"alert-danger": !alert.success, "alert-success": alert.success})}>
+              <div style={{whiteSpace: 'pre-line'}}>
+                {alert.message}
+              </div>
+            </div>
+          }
           <div className="mt-4">
             {
               this.state.mode === 'edit' &&
@@ -112,13 +123,24 @@ class EditExam extends React.Component {
   }
 
   onSaveExam = () => {
+    let response = undefined;
     if(this.state.mode === 'add') {
-      ExamStore.AddExam(this.state.exam);
+      response = ExamStore.AddExam(this.state.exam);
     }
     else {
-      ExamStore.EditExam(this.state.exam);
+      response = ExamStore.EditExam(this.state.exam);
     }
-    history.push('/admin/exams');
+    if(response) {
+      this.setState({
+        alert: { 
+          success: false, 
+          message: response.join('\n')
+        }
+      });
+    }
+    else {
+      history.push('/admin/exams');
+    }
   }
 
   onRemoveExam = () => {

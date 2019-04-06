@@ -9,7 +9,6 @@ function buildCustomRoute(getState, redirectPath) {
       <Route
         {...rest}
         render={props => {
-          console.log(Component);
           return (
             getState() ? (
               <Component {...props} />

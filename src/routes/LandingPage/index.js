@@ -81,10 +81,26 @@ export class LandingPage extends React.Component {
     e.preventDefault();
     if (this.state.isLogin) {
       this.Auth();
-    } else {
-      this.setState({
-        alert: { success: false, message: 'Chức năng ghi danh hiện tại chưa dùng được.' }
-      })
+    } 
+    else {
+      const {Username, Password, ConfirmPassword} = this.state;
+      const response = UserService.register({Username, Password, ConfirmPassword});
+      if(response) {
+        this.setState({
+          alert: { 
+            success: false,
+            message: response.join('\n')
+          }
+        });
+      }
+      else {
+        this.setState({
+          alert: { 
+            success: true,
+            message: 'Ghi danh thành công, hãy đăng nhập!'
+          }
+        });
+      }
     }
   }
 
@@ -159,7 +175,9 @@ export class LandingPage extends React.Component {
                   </ul>
                   {alert && 
                   <div className={cx("alert my-3", {"alert-danger": !alert.success, "alert-success": alert.success})}>
-                    {alert.message}
+                    <div style={{whiteSpace: 'pre-line'}}>
+                      {alert.message}
+                    </div>
                   </div>}
                   <div className="form-group mb-4">
                     <label htmlFor="">Tên tài khoản</label>
@@ -176,7 +194,12 @@ export class LandingPage extends React.Component {
                   {!isLogin &&
                   <div className="form-group mb-4">
                     <label htmlFor="">Xác nhận mật khẩu</label>
-                    <input className="form-control px-3 bdr-max" type="password" placeholder="Nhập lại mật khẩu" />
+                    <input 
+                      className="form-control px-3 bdr-max" 
+                      type="password" 
+                      placeholder="Nhập lại mật khẩu" 
+                      onChange={this.setInput('ConfirmPassword')}  
+                    />
                   </div>}
                   <div className="form-group">
                     <Button type="submit" className="w-100">

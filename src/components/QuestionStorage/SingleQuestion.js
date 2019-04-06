@@ -12,18 +12,23 @@ class SingleQuestion extends React.Component {
   }
 
   render () {
-    const { Id, Question, Answer, ActualAnswer } = this.props.question;
+    const { Id, Question, Answer} = this.props.question;
 
     const AnswerJSX = [];
-    for(const answer in Answer) {
+    for(const ans of ['A', 'B', 'C', 'D']) {
+      const answer = this.props.question[`Answer${ans}`];
       AnswerJSX.push(
-        <RadioButton
-          name={Question}
-          value={answer}
-          label={Answer[answer]}
-          checked={answer === ActualAnswer}
-        />
-      );
+        <div className="form-group w-100">
+          <RadioButton 
+            index={ans} 
+            value={answer} 
+            label={answer}
+            name={ans} 
+            onClick={this.onActualAnswerChange}
+            checked={Answer === ans}
+          />
+        </div>
+      )
     }
 
     return (

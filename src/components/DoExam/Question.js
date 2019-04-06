@@ -13,18 +13,19 @@ class Question extends React.Component {
   }
 
   render () {
-    const { Question, Answer } = this.state.question;
+    const { Question } = this.state.question;
     const AnswerJSX = [];
-    for(const answer in Answer) {
+    for(const ans of ['A', 'B', 'C', 'D']) {
+      const answer = this.state.question[`Answer${ans}`];
       AnswerJSX.push(
-        <div className="d-flex m-1">
+        <div className="form-group w-100">
           <RadioButton 
-            index={answer} 
+            index={ans} 
             value={answer} 
-            label={Answer[answer]} 
-            name={answer}
+            label={answer}
+            name={ans} 
             onClick={this.onAnswerChange}
-            checked={this.state.choice === answer}
+            checked={this.state.choice === ans}
           />
         </div>
       )

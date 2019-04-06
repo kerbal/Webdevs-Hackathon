@@ -2,6 +2,7 @@ import { LocalStorageService } from "./LocalStorageService";
 import uuid from 'uuid';
 import { Subject } from "../utils/Observable";
 import { ExamStore } from "./ExamService";
+import validate from 'validate.js';
 
 export class QuestionService {
   $subject = new Subject();
@@ -17,20 +18,32 @@ export class QuestionService {
   }
 
   AddQuestion (question) {
-    this.Questions.push(question);
-    LocalStorageService.WriteData('questions', this.Questions);
+    const response = this.validate(question);
+    if(response) {
+      return response;
+    }
+    else {
+      this.Questions.push(question);
+      LocalStorageService.WriteData('questions', this.Questions);
+    }
   }
 
   EditQuestion (question) {
-    this.Questions = this.Questions.map(qs => {
-      if(qs.Id === question.Id) {
-        return question;
-      }
-      else {
-        return qs;
-      }
-    });
-    LocalStorageService.WriteData('questions', this.Questions);
+    const response = this.validate(question);
+    if(response) {
+      return response;
+    }
+    else {
+      this.Questions = this.Questions.map(qs => {
+        if(qs.Id === question.Id) {
+          return question;
+        }
+        else {
+          return qs;
+        }
+      });
+      LocalStorageService.WriteData('questions', this.Questions);
+    }
   }
 
   RemoveQuestion (Id) {
@@ -43,12 +56,15 @@ export class QuestionService {
     LocalStorageService.WriteData('exams', ExamStore.Exams);
   }
 
-  DefaultQuestionForm (Question = '', Answer = {A: 'Đáp án A',B: 'Đáp án B',C: 'Đáp án C',D: 'Đáp án D'}, ActualAnswer = 'A') {
+  DefaultQuestionForm (Question = 'Câu hỏi') {
     return ({
       Id: uuid(), 
       Question,
-      Answer,
-      ActualAnswer
+      AnswerA: 'Đáp án A',
+      AnswerB: 'Đáp án B',
+      AnswerC: 'Đáp án C',
+      AnswerD: 'Đáp án D',
+      Answer: 'A'
     });
   }
 
@@ -58,6 +74,56 @@ export class QuestionService {
       this.Questions.push(this.DefaultQuestionForm(`Câu hỏi thứ ${i + 1}`));
     }
     LocalStorageService.WriteData('questions', this.Questions);
+  }
+
+  constrains = {
+    Question: {
+      presence: true,
+      length: {
+        minimum: 1,
+        message: '- Không được bỏ trống câu hỏi!'
+      }
+    },
+    AnswerA: {
+      presence: true,
+      length: {
+        minimum: 1,
+        message: '- Không được bỏ trống đáp án A!'
+      }
+    },
+    AnswerB: {
+      presence: true,
+      length: {
+        minimum: 1,
+        message: '- Không được bỏ trống đáp án B!'
+      }
+    },
+    AnswerC: {
+      presence: true,
+      length: {
+        minimum: 1,
+        message: '- Không được bỏ trống đáp án C!'
+      }
+    },
+    AnswerD: {
+      presence: true,
+      length: {
+        minimum: 1,
+        message: '- Không được bỏ trống đáp án D!'
+      }
+    },
+    Answer: {
+      presence: true,
+      length: {
+        minimum: 1,
+        maximum: 1,
+        message: '- Phải chọn 1 câu là câu trả lời!'
+      }
+    }
+  }
+
+  validate (question) {
+    return validate(question, this.constrains, {format: 'flat', fullMessages: false});
   }
 };
 

@@ -1,6 +1,6 @@
 import { Subject } from "../utils/Observable";
 import { history } from '..';
-import { UserService } from "./UserService";
+import { login } from "../api/user";
 
 class _AuthService {
   constructor () {
@@ -11,9 +11,18 @@ class _AuthService {
     }
   }
 
-  login = (Username, Password) => {
-    const user = UserService.FetchUser(Username, Password);
-    if (!!user) {
+  login = async (Username, Password) => {
+    const response = await login({Username, Password});
+    if(typeof response === 'string') {
+      return response;
+    }
+    else {
+      const user = {
+        ...response.User,
+        Code: response.Code,
+        IsAdmin: response.User.RoleName === 'admin',
+        Username: response.User.Name
+      };
       this.user = user;
       sessionStorage.setItem('wdh_js_user', JSON.stringify(user));
       this.$auth.broadcast(AuthService.logged);
@@ -23,7 +32,6 @@ class _AuthService {
         history.push('/app');
       }
     }
-    return false;
   }
 
   logout() {

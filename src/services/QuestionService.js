@@ -3,14 +3,16 @@ import uuid from 'uuid';
 import { Subject } from "../utils/Observable";
 import { ExamStore } from "./ExamService";
 import validate from 'validate.js';
+import { fetchQuestions } from "../api/admin";
 
 export class QuestionService {
   $subject = new Subject();
   constructor () {
-    this.Questions = LocalStorageService.ReadData('questions');
-    if(this.Questions === null) {
-      this.GenQuestion();
-    }
+    this.Questions = [];
+    (async () => {
+      this.Questions = await fetchQuestions();
+      console.log(this.Questions);
+    })();
   }
 
   GetQuestion (id) {

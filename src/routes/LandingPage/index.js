@@ -35,6 +35,7 @@ export class LandingPage extends React.Component {
       navbarSticky: false,
       detailLB: false,
       alert: null,
+      leaderboard: null
     }
     this.setIsLogin = isLogin => this.setState({ isLogin, alert: null });
     this.setDetailLB = detailLB => this.setState({ detailLB });
@@ -77,14 +78,14 @@ export class LandingPage extends React.Component {
     }
   }
 
-  SubmitForm = e => {
+  SubmitForm = async (e) => {
     e.preventDefault();
     if (this.state.isLogin) {
       this.Auth();
     } 
     else {
-      const {Username, Password, ConfirmPassword} = this.state;
-      const response = UserService.register({Username, Password, ConfirmPassword});
+      const {Username, Password, ConfirmPassword, Fullname} = this.state;
+      const response = await UserService.register({Username, Password, ConfirmPassword, Fullname});
       if(response) {
         this.setState({
           alert: { 
@@ -104,20 +105,29 @@ export class LandingPage extends React.Component {
     }
   }
 
-  Auth = () => {
+  Auth = async () => {
     let { Username, Password } = this.state;
-    if (Username && Password) {
-      if (!AuthService.login(Username, Password)){
-        this.setState({
-          alert: { success: false, message: 'Tên tài khoản hoặc mật khẩu không đúng.' }
-        });
-      } 
-    } else {
-      let error = {};
-      error["err_Username"] = !Username;
-      error["err_Password"] = !Password;
-      this.setState(error);
+    const response = await AuthService.login(Username, Password);
+    if(response) {
+      this.setState({
+        alert: { 
+          success: false,
+          message: response
+        }
+      });
     }
+    // if (Username && Password) {
+    //   if (!AuthService.login(Username, Password)){
+    //     this.setState({
+    //       alert: { success: false, message: 'Tên tài khoản hoặc mật khẩu không đúng.' }
+    //     });
+    //   } 
+    // } else {
+    //   let error = {};
+    //   error["err_Username"] = !Username;
+    //   error["err_Password"] = !Password;
+    //   this.setState(error);
+    // }
   }
 
   render() {
@@ -185,6 +195,13 @@ export class LandingPage extends React.Component {
                       type="text" placeholder="Tên tài khoản" onChange={this.setInput('Username')}/>
                     {this.state["err_Username"] && <span className="text-main mt-3">Tên tài khoản là bắt buộc</span>}
                   </div>
+                  {!isLogin &&
+                    <div className="form-group mb-4">
+                      <label htmlFor="">Tên đầy đủ</label>
+                      <input className={cx("form-control px-3 bdr-max", {"bd-main": this.state["err_Fullname"]})} 
+                        type="text" placeholder="Tên đầy đủ" onChange={this.setInput('Fullname')} />
+                    </div>                    
+                  }
                   <div className="form-group mb-4">
                     <label htmlFor="">Mật khẩu</label>
                     <input className={cx("form-control px-3 bdr-max", {"bd-main": this.state["err_Password"]})} 
@@ -214,17 +231,20 @@ export class LandingPage extends React.Component {
             <div id="rank-section" className="col-md-6 col-lg-5 pr-md-4 order-2 order-md-1">
               <Card>
                 <Title className="text-center my-4" size="3">Bảng vàng thành tích</Title>
-                {UserService.Users
-                .filter(user => !user.IsAdmin)
-                .sort((a, b) => b.Exam.Score - a.Exam.Score)
-                .slice(0, 10)
-                .map((user, idx) => (
-                  <h4 key={user.Username} className="my-3 form-control px-3 bdr-max hover">
-                    <img className="icon mr-2" src={crown} width="20" style={{marginTop:'-5px'}}/>
-                    <span>{idx + 1}. {user.Name}</span>
-                    <span className="float-right">{user.Exam.Score}</span>
-                  </h4>
-                ))}
+                {
+                  (
+                    this.state.leaderboard &&
+                    this.state.leaderboard
+                    .slice(0, 10)
+                    .map((user, idx) => (
+                      <h4 key={user.Username} className="my-3 form-control px-3 bdr-max hover">
+                        <img className="icon mr-2" src={crown} width="20" style={{marginTop:'-5px'}}/>
+                        <span>{idx + 1}. {user.UserName}</span>
+                        <span className="float-right">{user.Score}</span>
+                      </h4>
+                    ))
+                  ) || "Đang tải"
+                }
                 <Button className="w-100 mt-2 mb-3" onClick={_ => this.setDetailLB(true)}>
                   Chi tiết
                 </Button>
@@ -267,5 +287,13 @@ export class LandingPage extends React.Component {
         <Footer style={{ marginTop: '3rem' }}></Footer>
       </div>
     )
+  }
+
+  async componentWillMount () {
+    const lb = await UserService.Leaderboard();
+    console.log(lb);
+    this.setState(() => ({
+      leaderboard: lb
+    }))
   }
 }

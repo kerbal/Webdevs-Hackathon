@@ -38,8 +38,6 @@ class DoExam extends React.Component {
           changeAnswer={this.onChangeAnswer}
         />
         </Card>
-        
-        
         <QuestionBrowser
           current={questionIndex}
           questions={exam.QuestionList}
@@ -53,7 +51,6 @@ class DoExam extends React.Component {
   }
   
   async componentWillMount () {
-    const user = UserService.FetchUser(AuthService.user.Username, AuthService.user.Password);
     const exam = ExamStore.GetExam(this.props.match.params.examId);
     if(exam && user.Exam.ExamId === '') {
       user.Exam = {
@@ -63,23 +60,11 @@ class DoExam extends React.Component {
         EndTime: 0,
         Score: -1
       };
-      exam.UserCount++;
-      ExamStore.EditExam(exam);
       await this.setState(() => ({
         user,
         exam,
         fetched: true
       }));
-    }
-    else if(user.Exam.Score === -1 ) {
-      await this.setState(() => ({
-        user,
-        exam,
-        fetched: true
-      }));
-    }
-    else {
-      history.replace('/app/history');
     }
   }
 

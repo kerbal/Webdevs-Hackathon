@@ -1,7 +1,7 @@
 .search{
   position: relative;
 }
-.search .fa-search{
+.search .fa{
   position: absolute;
   top: 15px;
   left: 15px;

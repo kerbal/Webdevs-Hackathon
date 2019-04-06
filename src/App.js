@@ -23,7 +23,7 @@ class App extends Component {
             <PrivateRoute path="/app" exact component={Home}></PrivateRoute>
             <PrivateRoute path="/app/leaderboard" component={LeaderBoardPage}></PrivateRoute>
             <PrivateRoute path="/app/history" component={History}></PrivateRoute>
-            <PrivateRoute path="/app/exam/:examId" exact component={DoExam}></PrivateRoute>
+            <PrivateRoute path="/app/exam/:code" exact component={DoExam}></PrivateRoute>
           </Switch>
         </div>
         <Footer style={{ marginTop: '3rem' }}></Footer>
